@@ -14,7 +14,6 @@ Things you may want to cover:
 * Configuration: Create '.env' file for database configuration ( look at sample.env )
 
 * Database creation: run those cli in application directory
-  - bundle install
   - rails db:create
   - rails db:migrate
   - rails db:seed (optional)
