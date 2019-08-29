@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :role
       t.string :activation_digest
       t.boolean :activated
-      t.date_time :activated_at
+      t.datetime :activated_at
       t.string :reset_digest
 
       t.timestamps
