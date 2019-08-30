@@ -1,0 +1,65 @@
+.circle-btn {
+  width:40px;
+  height:40px;
+  border-radius: 50%;
+}
+.fb-bg {
+  background:#4267b2;
+}
+.gg-bg {
+  background:#d93025;
+}
+
+.bg-cyan {
+  background:#3897f0;
+}
+
+.fw-600{
+  font-weight: 600;
+}
+
+.text-cyan {
+  color: #3897f0;
+}
+
+.text-cyan:hover {
+  color:#2982d6;
+}
+
+.btn-cyan {
+  background: #3897f0;
+}
+
+.btn-cyan:hover {
+  background: #2982d6;
+}
+
+.btn-gray {
+  background: #f8f9fa;
+}
+
+.btn-cyan:focus {
+  border: 1px solid #3897f0;
+}
+
+.btn-gray:focus {
+  border: 1px solid #ced4da;
+}
+
+.custom-form-control {
+  border:1px solid #d6dadf;
+}
+
+.custom-form-control:focus {
+  border: 1px solid #b9bcbe;
+}
+
+.disabled-focus:focus {
+  outline:none;
+  box-shadow: none;
+}
+
+.custom-image-input {
+  border-radius: 4px;
+  width:100%;
+}

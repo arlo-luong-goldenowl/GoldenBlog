@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #71da71;">
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="background-color: #71da71;">
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -14,9 +14,21 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Pricing</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+        <% if logged_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Account
+            </a>
+            <div class="dropdown-menu">
+              <%= link_to "Profile", profile_users_path, class: "dropdown-item" %>
+              <%= link_to "Logout", logout_path, class: "dropdown-item", method: :delete %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+        <% end %>
     </ul>
   </div>
 </nav>

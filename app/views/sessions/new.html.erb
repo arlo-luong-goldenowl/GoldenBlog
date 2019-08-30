@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 pt-3">
+      <h1 class="text-center text-dark mb-5">Please login</h1>
+      <%= form_for(:session, url: sessions_path, html: { autocomplete: "off" }) do |f| %>
+        <%= render "shared/alert" %>
+        <div class="form-group">
+          <%= f.text_field :email, type: "email", placeholder: "email...",class: "form-control custom-form-control disabled-focus", id: "email" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :password, type: "password", placeholder: "password..." ,class: "form-control custom-form-control disabled-focus", id: "password" %>
+        </div>
+        <div class="form-check float-left">
+          <%= f.check_box :remember_me, class: "form-check-input"%>
+          <label class="form-check-label text-secondary">Remember me</label>
+        </div>
+        <%= link_to "Forget password ? ", "/forget", class: "float-right font-italic text-cyan text-decoration-none"%>
+        <%= f.submit "Login", class: "col-md-12 btn btn-cyan fw-600 text-white disabled-focus mb-1 mt-3" %>
+        <%= link_to "Signup now with email !", '/', class: "col-md-12  btn btn-gray text-secondary disabled-focus" %>
+        <p class="mt-4 text-center">
+          <i class="text-secondary font-italic">Or login with</i>
+        </p>
+          <div class="circle-btn-group text-center">
+            <%= link_to "/", class: "btn gg-bg circle-btn text-white" do %>
+              <%= fa_icon "google" %>
+            <% end %>
+            <%= link_to '/auth/facebook', class: "btn fb-bg circle-btn text-white" do %>
+              <%= fa_icon "facebook" %>
+            <% end %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
