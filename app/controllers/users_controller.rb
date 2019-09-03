@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def profile
+    render :profile
+  end
+
   private
 
     def user_params
