@@ -17,11 +17,11 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      flash[:success] = "Object successfully created"
-      redirect_to new_post_path
+      # flash[:success] = "Object successfully created"
+      redirect_to posts_path
     else
-      flash[:error] = "Something went wrong"
-      render 'new'
+      # flash[:error] = "Something went wrong"
+      render :new
     end
   end
 
