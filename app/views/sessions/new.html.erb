@@ -20,14 +20,11 @@
         <p class="mt-4 text-center">
           <i class="text-secondary font-italic">Or login with</i>
         </p>
-          <div class="circle-btn-group text-center">
-            <%= link_to "/", class: "btn gg-bg circle-btn text-white" do %>
-              <%= fa_icon "google" %>
-            <% end %>
-            <%= link_to '/auth/facebook', class: "btn fb-bg circle-btn text-white" do %>
-              <%= fa_icon "facebook" %>
-            <% end %>
-          </div>
+        <div class="row justify-content-center">
+          <%= link_to '/auth/facebook', class: "text-center btn fb-bg text-white"  do %>
+            <span class="fw-600">facebook</span>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>

@@ -3,9 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'rails-timeago', '~> 2.0'
+gem 'carrierwave'
 gem 'omniauth-facebook'
-# font-awesome 4.7
-gem "font-awesome-rails"
 #bootstrap 4
 gem 'bootstrap', '~> 4.2.1'
 #jquery
