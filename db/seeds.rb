@@ -13,5 +13,11 @@ Category.create!(name: 'Gamming')
 Category.create!(name: 'Programming')
 
 15.times do |i|
-  Post.create!(title: "Title with n = #{i}", content: "Content blah blah blah blah with #{i}", user_id: user1.id, category_id: 2)
+  Post.create!(
+    title: "Title with n = #{i}",
+    content: "Content blah blah blah blah with #{i}",
+    user_id: user1.id,
+    category_id: 5,
+    image: '1_j_zP74-cpvXRcs8dM_pkMQ.jpeg'
+  )
 end

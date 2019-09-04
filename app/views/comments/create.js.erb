@@ -1,0 +1,9 @@
+var post_element = $("#post-<%= @post.id %>");
+
+post_element
+  .find(".post-comment")
+  .append("<%= j render partial: 'posts/post_comment', locals: { comment: @comment } %>");
+
+post_element
+  .find(".comment-input > form > textarea")
+  .val("");
