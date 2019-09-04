@@ -23,7 +23,7 @@ class PostsController < ApplicationController
       # flash[:success] = "Object successfully created"
       redirect_to posts_path
     else
-      # flash[:error] = "Something went wrong"
+      @categories = Category.all
       render :new
     end
   end

@@ -1,7 +1,7 @@
 var post_element = $('#post-<%= @post.id %>');
 var status = '<%= @status %>';
 var heart_icon_element = post_element.find('.post-action > .like-btn > i');
-var post_likes_element = post_element.find('.post-content > .post-likes');
+var post_likes_element = post_element.find('.post-likes');
 if(status === 'true') {
   heart_icon_element
     .removeClass('text-dark fa-heart-o')

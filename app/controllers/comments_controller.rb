@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
+    @from_page = params[:comment][:from_page]
     @comment = @post.comments.build(comment_params)
     @comment.user_id = current_user.id
 

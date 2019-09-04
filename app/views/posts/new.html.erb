@@ -3,6 +3,7 @@
     <div class="col-md-6 offset-md-3 pt-3">
       <h1 class="text-center text-dark mb-5">Add new post here</h1>
       <%= form_for(@post, html: { multipart: true }) do |f| %>
+        <%= render partial: "shared/error_alert", locals: { object: @post } %>
         <div class="form-group">
           <%= f.label :title %>
           <%= f.text_field :title, type: "text", placeholder: "title...", class: "form-control custom-form-control disabled-focus", id: "email" %>
@@ -16,7 +17,6 @@
               { class: "custom-select custom-form-control disabled-focus" }
             ) %>
         </div>
-        <p id="xyz">VCL</p>
         <div class="form-group">
           <%= f.label :image %>
           <div class="custom-file">

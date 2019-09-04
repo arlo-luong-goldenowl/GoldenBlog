@@ -44,7 +44,7 @@
       <%= link_to post, class: "text-secondary text-decoration-none" do %>
         All comments
       <% end %>
-        <%= render partial: "post_comment", collection: post.comments, as: :comment %>
+        <%= render partial: "post_comment", collection: post.comments.top_2.reverse, as: :comment %>
     </div>
     <div class="post-release-time pl-3">
       <small class="text-secondary">
@@ -53,6 +53,7 @@
     </div>
     <div class="mt-2 comment-input gray-border-top p-3 ">
       <%= form_for(:comment, url: post_comments_path(post), method: :post, remote: true, html: { class: "d-flex justify-content-center m-0 p-0"} ) do |f| %>
+        <%= f.hidden_field :from_page, value: :index_controller  %>
         <%= f.text_area :content, placeholder: "comment in here" %>
         <%= f.submit "Send", class: "ml-auto comment-btn" %>
       <% end %>

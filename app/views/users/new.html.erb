@@ -3,7 +3,7 @@
     <div class="col-md-6 offset-md-3 pt-3">
       <h1 class="text-center">Sign up here !</h1>
       <%= form_for(@user) do |f| %>
-        <%= render "shared/error_alert" %>
+        <%= render partial: "shared/error_alert", locals: { object: @user } %>
         <div class="form-group">
           <label for="name"><%= f.label :name %></label>
           <%= f.text_field :name, type: "text", class: "form-control", id: "name" %>
