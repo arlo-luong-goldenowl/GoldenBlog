@@ -1,0 +1,61 @@
+<div class="col-md-12">
+  <div id="post-<%= post.id %>" class="post-wrapper bg-white mb-5">
+    <div class="post-header gray-border-bottom d-flex flex-row align-items-center p-3">
+      <div class="avatar">
+        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
+      </div>
+      <div class="ml-3"><%= post.user.name %></div>
+      <div class="more-actions ml-auto">
+        <i class="fa fa-ellipsis-h fa-large"></i>
+      </div>
+    </div>
+    <div class="post-thumbnail">
+      <img src="<%= post.image %>" alt="">
+    </div>
+    <div class="post-action d-flex flex-row align-items-center pl-3 pt-3">
+      <%= link_to like_unlike_post_path(post),
+        method: :post,
+        remote: true ,
+        class: "like-btn text-decoration-none" do
+      %>
+        <% if is_like_this_posts?(post.likes) %>
+          <i class="fa fa-heart fa-large text-danger"></i>
+        <% else %>
+          <i class="fa fa-heart-o fa-large text-dark"></i>
+        <% end %>
+      <% end %>
+      <%= link_to post, class: "comment-btn text-decoration-none" do %>
+        <i class="ml-3 fa fa-comments fa-large text-dark"></i>
+      <% end %>
+       <%= link_to post, class: "share-btn text-decoration-none" do %>
+        <i class="ml-3 fa fa-share fa-large text-dark"></i>
+      <% end %>
+    </div>
+    <div class="post-content pl-3">
+      <div class="post-likes fw-600 mt-1"><%= post.likes.count %> likes</div>
+      <div class="post-body">
+        <span class="fw-600"><%= post.user.name %></span>
+        <span class="font-weight-normal">
+          <%= post.content %>
+        </span>
+      </div>
+    </div>
+    <div class="post-comment pl-3 pr-3">
+      <%= link_to post, class: "text-secondary text-decoration-none" do %>
+        All comments
+      <% end %>
+        <%= render partial: "post_comment", collection: post.comments, as: :comment %>
+    </div>
+    <div class="post-release-time pl-3">
+      <small class="text-secondary">
+        <%= time_ago_in_words post.created_at %> ago
+      </small>
+    </div>
+    <div class="mt-2 comment-input gray-border-top p-3 ">
+      <%= form_for(:comment, url: post_comments_path(post), method: :post, remote: true, html: { class: "d-flex justify-content-center m-0 p-0"} ) do |f| %>
+        <%= f.text_area :content, placeholder: "comment in here" %>
+        <%= f.submit "Send", class: "ml-auto comment-btn" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -12,5 +12,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :posts do
+    resources :comments, only: [:create]
+    member do
+      post :like_unlike, to: 'likes#like_unlike'
+    end
+  end
+
   resources :sessions, only: [:create]
 end
