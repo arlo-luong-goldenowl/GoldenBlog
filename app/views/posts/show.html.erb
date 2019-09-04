@@ -2,143 +2,66 @@
   <div class="row">
     <div class="col-md-12 post-detail-wrapper bg-white">
       <div class="row">
-            <div class="col-md-8 p-0">
-              <div class="post-thumbnail">
-                <img src="<%= @post.image %>" alt="">
-              </div>
+        <div class="col-md-8 p-0">
+          <div class="post-thumbnail">
+            <img src="<%= @post.image %>" alt="">
+          </div>
+        </div>
+        <div id="post-<%= @post.id %>" class="col-md-4 p-0">
+          <div class="post-header gray-border-left gray-border-bottom d-flex flex-row align-items-center p-4">
+            <div class="avatar">
+              <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
             </div>
-            <div class="col-md-4 p-0">
-              <div class="post-header gray-border-left gray-border-bottom d-flex flex-row align-items-center p-4">
+            <div class="ml-3 fw-600"><%= @post.user.name %></div>
+            <div class="more-actions ml-auto">
+              <i class="fa fa-ellipsis-h fa-large"></i>
+            </div>
+          </div>
+          <div class="post-detail-comments-wrapper gray-border-left pl-4 pr-5 pt-3 ">
+            <div class="post-detail-comments pb-2">
+              <div class="comment d-flex">
                 <div class="avatar">
                   <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
                 </div>
-                <div class="ml-3 fw-600"><%= @post.user.name %></div>
-                <div class="more-actions ml-auto">
-                  <i class="fa fa-ellipsis-h fa-large"></i>
+                <div class="mt-2 ml-3">
+                  <span class="fw-600"><%= @post.user.name %></span>
+                  <span class="font-weight-normal">
+                    <%= @post.content %>
+                  </span>
+                  <p class="text-secondary"><%= time_ago_in_words @post.created_at %> ago</p>
                 </div>
               </div>
-              <div class="post-detail-comments-wrapper gray-border-left pl-4 pr-5 pt-3 ">
-                <div class="post-detail-comments pb-2">
-                  <div class="comment d-flex">
-                    <div class="avatar">
-                      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
-                    </div>
-                    <div class="mt-2 ml-3">
-                      <span class="fw-600">aaabbbb</span>
-                      <span class="font-weight-normal">
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                      </span>
-                      <p class="text-secondary mt-3">2 hours ago</p>
-                    </div>
-                  </div>
-                  <div class="comment d-flex">
-                    <div class="avatar">
-                      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
-                    </div>
-                    <div class="mt-2 ml-3">
-                      <span class="fw-600">aaabbbb</span>
-                      <span class="font-weight-normal">
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="comment d-flex">
-                    <div class="avatar">
-                      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
-                    </div>
-                    <div class="mt-2 ml-3">
-                      <span class="fw-600">aaabbbb</span>
-                      <span class="font-weight-normal">
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                      </span>
-                    </div>
-                  </div>
-                  <div class="comment d-flex">
-                    <div class="avatar">
-                      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
-                    </div>
-                    <div class="mt-2 ml-3">
-                      <span class="fw-600">aaabbbb</span>
-                      <span class="font-weight-normal">
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                        is simply dummy text of the printing and typesetting industry.
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="post-action gray-border-left gray-border-top d-flex flex-row align-items-center pl-3 pt-2">
-                <%= link_to '/', class: "text-decoration-none" do %>
-                  <i class="fa fa-heart-o fa-large text-dark"></i>
-                <% end %>
-                <%= link_to '/', class: "text-decoration-none" do %>
-                  <i class="ml-3 fa fa-comments fa-large text-dark"></i>
-                <% end %>
-                <%= link_to '/', class: "text-decoration-none" do %>
-                  <i class="ml-3 fa fa-share fa-large text-dark"></i>
-                <% end %>
-              </div>
-              <div class="fw-600 gray-border-left pl-3"><%= @post.likes.count %> likes</div>
-              <div class="text-secondary gray-border-left pl-3 pb-2">
-                <small>
-                  <%= time_ago_in_words @post.created_at %> ago
-                </small>
-              </div>
-              <div class="comment-input gray-border-left gray-border-top p-3 ">
-                <form action="" method="post" class="d-flex justify-content-center m-0 p-0">
-                  <textarea name="" id="" placeholder="Comment in here" rows="4"></textarea>
-                  <button class="ml-auto comment-btn">Send</button>
-                </form>
-              </div>
+              <%= render partial: "post_detail_comment", collection: @post.comments.reverse, as: :comment %>
+
             </div>
           </div>
+          <div class="post-action gray-border-left gray-border-top d-flex flex-row align-items-center pl-3 pt-2">
+            <%= link_to '/', class: "text-decoration-none" do %>
+              <i class="fa fa-heart-o fa-large text-dark"></i>
+            <% end %>
+            <%= link_to '/', class: "text-decoration-none" do %>
+              <i class="ml-3 fa fa-comments fa-large text-dark"></i>
+            <% end %>
+            <%= link_to '/', class: "text-decoration-none" do %>
+              <i class="ml-3 fa fa-share fa-large text-dark"></i>
+            <% end %>
+          </div>
+          <div class="fw-600 gray-border-left pl-3"><%= @post.likes.count %> likes</div>
+          <div class="text-secondary gray-border-left pl-3 pb-2">
+            <small>
+              <%= time_ago_in_words @post.created_at %> ago
+            </small>
+          </div>
+          <div class="comment-input gray-border-left gray-border-top p-3 ">
+            <%= form_for(:comment, url: post_comments_path(@post), method: :post, remote: true, html: { class: "d-flex justify-content-center m-0 p-0"} ) do |f| %>
+              <%= f.hidden_field :from_page, value: :show_controller %>
+              <%= hidden_field_tag :index_controller %>
+              <%= f.text_area :content, placeholder: "comment in here" %>
+              <%= f.submit "Send", class: "ml-auto comment-btn" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
