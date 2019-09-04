@@ -2,7 +2,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token
 
   validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }
   has_secure_password
   has_many :posts
@@ -12,7 +12,8 @@ class User < ApplicationRecord
   # Returns true if the given token matches the digest of attribute
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
-    return false if digest.nil?
+
+    return false if digest.blank?
 
     BCrypt::Password.new(digest).is_password?(token)
   end
