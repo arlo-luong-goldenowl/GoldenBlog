@@ -20,7 +20,6 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      # flash[:success] = "Object successfully created"
       redirect_to posts_path
     else
       @categories = Category.all
@@ -30,6 +29,6 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:title ,:content, :category_id ,:image)
+      params.require(:post).permit(:title, :content, :category_id, :image)
     end
 end

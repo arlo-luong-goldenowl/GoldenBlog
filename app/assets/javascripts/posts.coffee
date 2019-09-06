@@ -4,6 +4,19 @@ $ ->
     set_image_to_preview(this,previewImageId)
   )
 
+  $('.comment-input > form > textarea').on('input', ->
+    scroll_height = $(this).prop('scrollHeight')
+    if scroll_height > 84
+      $(this).css('overflow', 'visible')
+    else
+    # if scrollHeight < 84
+      delta = 150 + 35 + scroll_height
+      new_height = "calc(100% - " + delta + "px)"
+      $('.post-detail-comments-wrapper').css('height': new_height)
+      $(this).css('height', scroll_height + 'px')
+  )
+
+
 set_image_to_preview = (input, element_id) ->
     if (input.files && input.files[0])
       reader = new FileReader()

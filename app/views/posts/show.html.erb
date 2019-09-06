@@ -2,13 +2,13 @@
   <div class="row">
     <div class="col-md-12 post-detail-wrapper bg-white">
       <div class="row">
-        <div class="col-md-8 p-0">
+        <div class="col-sm-12 col-md-8 p-0">
           <div class="post-thumbnail">
             <img src="<%= @post.image %>" alt="">
           </div>
         </div>
-        <div id="post-<%= @post.id %>" class="col-md-4 p-0">
-          <div class="post-header gray-border-left gray-border-bottom d-flex flex-row align-items-center p-4">
+        <div id="post-<%= @post.id %>" class="col-sm-12 col-md-4 p-0">
+          <div class="post-header gray-border-bottom d-flex flex-row align-items-center p-4">
             <div class="avatar">
               <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
             </div>
@@ -17,7 +17,7 @@
               <i class="fa fa-ellipsis-h fa-large"></i>
             </div>
           </div>
-          <div class="post-detail-comments-wrapper gray-border-left pl-4 pr-5 pt-3 ">
+          <div class="post-detail-comments-wrapper pl-4 pr-5 pt-3 ">
             <div class="post-detail-comments pb-2">
               <div class="comment d-flex">
                 <div class="avatar">
@@ -35,7 +35,7 @@
 
             </div>
           </div>
-          <div class="post-action gray-border-left gray-border-top d-flex flex-row align-items-center pl-3 pt-2">
+          <div class="post-actiongray-border-top d-flex flex-row align-items-center pl-3 pt-2">
             <%= link_to like_unlike_post_path(@post),
               method: :post,
               remote: true ,
@@ -54,17 +54,17 @@
               <i class="ml-3 fa fa-share fa-large text-dark"></i>
             <% end %>
           </div>
-          <div class="post-likes fw-600 gray-border-left pl-3"><%= @post.likes.count %> likes</div>
-          <div class="text-secondary gray-border-left pl-3 pb-2">
+          <div class="post-likes fw-600 pl-3"><%= @post.likes.count %> likes</div>
+          <div class="text-secondary pl-3 pb-2">
             <small>
               <%= time_ago_in_words @post.created_at %> ago
             </small>
           </div>
-          <div class="comment-input gray-border-left gray-border-top p-3 ">
+          <div class="comment-input gray-border-top p-3 ">
             <%= form_for(:comment, url: post_comments_path(@post), method: :post, remote: true, html: { class: "d-flex justify-content-center m-0 p-0"} ) do |f| %>
               <%= f.hidden_field :from_page, value: :show_controller %>
               <%= hidden_field_tag :index_controller %>
-              <%= f.text_area :content, placeholder: "comment in here" %>
+              <%= f.text_area :content, placeholder: "comment in here", class: "pr-2" %>
               <%= f.submit "Send", class: "ml-auto comment-btn" %>
             <% end %>
           </div>
