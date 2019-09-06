@@ -16,20 +16,6 @@ $ ->
       $(this).css('height', scroll_height + 'px')
   )
 
-  $('.like-btn').bind('click', (e) ->
-    e.preventDefault()
-    if($(this).find('i').attr('class').includes('text-dark'))
-      $(this).find('i')
-      .removeClass('text-dark fa-heart-o')
-      .addClass('text-danger fa-heart heartBeat animated')
-    else
-      $(this).find('i')
-      .removeClass('text-danger fa-heart heartBeat animated')
-      .addClass('text-dark fa-heart-o')
-  )
-
-
-
 
 set_image_to_preview = (input, element_id) ->
     if (input.files && input.files[0])
