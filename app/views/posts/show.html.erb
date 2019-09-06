@@ -128,7 +128,7 @@
               <div class="fw-600 gray-border-left pl-3"><%= @post.likes.count %> likes</div>
               <div class="text-secondary gray-border-left pl-3 pb-2">
                 <small>
-                  <%= time_ago_in_words @post.created_at %> ago
+                  <%= time_ago_in_words(@post.created_at) %> ago
                 </small>
               </div>
               <div class="comment-input gray-border-left gray-border-top p-3 ">
