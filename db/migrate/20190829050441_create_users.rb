@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.text :image
       t.string :password_digest
       t.string :remember_digest
-      t.string :role
+      t.string :role, default: 'member'
       t.string :activation_digest
       t.boolean :activated
       t.datetime :activated_at

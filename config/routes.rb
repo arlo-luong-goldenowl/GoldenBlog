@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   get    '/auth/:provider/callback', to: 'sessions#social_login'
   get    '/auth/failure', to: redirect('/')
 
-  resources :users, only: [:create, :show] do
+  resources :users do
     collection do
-      get :profile
+      get 'profile',         to: 'users#profile'
+      get 'change-password', to: 'users#change_password'
+      post 'update-password', to: 'users#update_password'
     end
   end
 

@@ -4,6 +4,21 @@ body {
 }
 
 //ultis
+.borderless {
+  border: 0
+}
+
+.circle-image {
+  border-radius: 50%;
+  min-height: 75px;
+  height: auto;
+  max-height: 130px;
+}
+
+.fa-6 {
+  font-size: 64px;
+}
+
 .custom-nav-bar {
   height: 77px;
 }
@@ -221,8 +236,8 @@ body {
 }
 
 //post detail
-
-
+//==========================================
+//heart beat animation
 
 @-webkit-keyframes heartBeat {
   0% {
@@ -291,3 +306,20 @@ body {
   -webkit-animation-duration: 800ms;
   animation-duration: 800ms;
 }
+
+//end heart beat animation
+
+//edit-page
+.edit-profile-wrapper {
+  border-radius: 4px;
+  border: 1px solid #e6e6e6;
+}
+
+.post-thumbnail {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  // height: 280px
+}
+
+//end edit-page
