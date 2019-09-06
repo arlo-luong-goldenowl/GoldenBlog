@@ -17,7 +17,6 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      # flash[:success] = "Object successfully created"
       redirect_to posts_path
     else
       @categories = Category.all
