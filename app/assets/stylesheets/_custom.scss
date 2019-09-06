@@ -116,7 +116,6 @@ body {
 }
 .comment-input {
   min-height: 56px;
-  max-height: 80px;
 }
 .comment-input > textarea {
   background: 0 0;
@@ -182,7 +181,7 @@ body {
   -webkit-flex-shrink: 1;
   -ms-flex-negative: 1;
   flex-shrink: 1;
-  min-height: 0;
+  min-height: 200px;
   height: calc(100% - 206px);
 }
 .post-detail-comments {
