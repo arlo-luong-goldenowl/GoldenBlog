@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts
-  resources :sessions, only: [:create, :destroy]
+  resources :posts do
+    resources :comments, only: [:create]
+  end
+
+  resources :sessions, only: [:create]
 end

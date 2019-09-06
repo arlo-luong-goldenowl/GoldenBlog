@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <div class="post-wrapper bg-white mb-5">
+  <div id="post-<%= post.id %>" class="post-wrapper bg-white mb-5">
     <div class="post-header gray-border-bottom d-flex flex-row align-items-center p-3">
       <div class="avatar">
         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
@@ -8,19 +8,18 @@
       <div class="more-actions ml-auto">
         <i class="fa fa-ellipsis-h fa-large"></i>
       </div>
-
     </div>
     <div class="post-thumbnail">
       <img src="<%= post.image %>" alt="">
     </div>
     <div class="post-action d-flex flex-row align-items-center pl-3 pt-3">
-      <%= link_to post, class: "text-decoration-none" do %>
+      <%= link_to post, class: "like-btn text-decoration-none" do %>
         <i class="fa fa-heart-o fa-large text-dark"></i>
       <% end %>
-      <%= link_to post, class: "text-decoration-none" do %>
+      <%= link_to post, class: "comment-btn text-decoration-none" do %>
         <i class="ml-3 fa fa-comments fa-large text-dark"></i>
       <% end %>
-       <%= link_to post, class: "text-decoration-none" do %>
+       <%= link_to post, class: "share-btn text-decoration-none" do %>
         <i class="ml-3 fa fa-share fa-large text-dark"></i>
       <% end %>
     </div>
@@ -37,32 +36,7 @@
       <%= link_to post, class: "text-secondary text-decoration-none" do %>
         All comments
       <% end %>
-      <div class="post-body">
-        <span class="fw-600">aaabbbb</span>
-        <span class="font-weight-normal">
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-          is simply dummy text of the printing and typesetting industry.
-        </span>
-      </div>
-      <div class="post-body">
-        <span class="fw-600">acccddd</span>
-        <span class="font-weight-normal">font-weight-normal</span>
-      </div>
-      <div class="post-body">
-        <span class="fw-600">eeefff</span>
-        <span class="font-weight-normal">font-weight-normal</span>
-      </div>
+        <%= render partial: "post_comment", collection: post.comments.top_2.reverse, as: :comment %>
     </div>
     <div class="post-release-time pl-3">
       <small class="text-secondary">
@@ -70,10 +44,11 @@
       </small>
     </div>
     <div class="mt-2 comment-input gray-border-top p-3 ">
-      <form action="" method="post" class="d-flex justify-content-center m-0 p-0">
-        <textarea name="" id="" placeholder="Comment in here" rows="4"></textarea>
-        <button class="ml-auto comment-btn">Send</button>
-      </form>
+      <%= form_for(:comment, url: post_comments_path(post), method: :post, remote: true, html: { class: "d-flex justify-content-center m-0 p-0"} ) do |f| %>
+        <%= f.hidden_field :from_page, value: :index_controller  %>
+        <%= f.text_area :content, placeholder: "comment in here", class: "pr-2" %>
+        <%= f.submit "Send", class: "ml-auto comment-btn" %>
+      <% end %>
     </div>
   </div>
 </div>

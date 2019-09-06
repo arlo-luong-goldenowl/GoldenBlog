@@ -1,0 +1,36 @@
+var post_element = $("#post-<%= @post.id %>");
+var from_page = "<%= @from_page %>";
+
+//use ajax in 2 pages
+//  comment in index page -> /posts
+//  comment in show page -> /posts/:id
+//  each page send with hidden input variable "from_page"
+
+if(from_page === "index_controller") {
+  //append new comment
+  post_element
+    .find(".post-comment")
+    .append("<%= j render partial: 'posts/post_comment', locals: { comment: @comment } %>");
+
+  //clear input after comment success
+  post_element
+    .find(".comment-input > form > textarea")
+    .val("");
+} else {
+  //append new comment
+  post_element
+    .find(".post-detail-comments-wrapper")
+    .find(".post-detail-comments")
+    .append("<%= j render partial: 'posts/post_detail_comment', locals: { comment: @comment } %>");
+
+  //clear input after comment success
+  post_element
+    .find(".comment-input > form > textarea")
+    .val("");
+
+  //scroll to bottom latest comment
+  var comments_element = post_element.find(".post-detail-comments");
+  post_element
+    .find(".post-detail-comments-wrapper")
+    .scrollTop(comments_element.height());
+}

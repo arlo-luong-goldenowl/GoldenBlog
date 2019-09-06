@@ -19,6 +19,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path
     else
+      @categories = Category.all
       render :new
     end
   end
