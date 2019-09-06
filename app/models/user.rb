@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }
   has_secure_password
+  has_many :posts
 
   # Returns true if the given token matches the digest of attribute
   def authenticated?(attribute, token)

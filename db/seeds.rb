@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+user1 = User.create!(name: 'admin', email: 'admin@gmail.com', password: 'admin123456')
+Category.create!(name: 'Fashion')
+Category.create!(name: 'Music')
+Category.create!(name: 'Travel')
+Category.create!(name: 'Gamming')
+Category.create!(name: 'Programming')
+
+15.times do |i|
+  Post.create!(title: "Title with n = #{i}", content: "Content blah blah blah blah with #{i}", user_id: user1.id, category_id: 2)
+end
