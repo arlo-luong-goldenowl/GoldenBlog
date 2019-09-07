@@ -23,7 +23,7 @@
             <%= image_tag( @user.image.present? ?  @user.image.to_s : 'default_avatar.png', id: "preview-image") %>
           </div>
           <div class="col-sm-6">
-            <div>Aguyleung@gmail.com</div>
+            <div><%= @user.email %></div>
             <a class="change-image-text text-cyan fw-600 text-decoration-none" href='#'> Change your image</a>
           </div>
         </div>

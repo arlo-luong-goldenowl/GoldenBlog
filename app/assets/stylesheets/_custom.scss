@@ -47,6 +47,10 @@ body {
   font-size: 30px;
 }
 
+.fa-md {
+  font-size: 24px;
+}
+
 //end ultis
 //========================================================
 //custom background color
@@ -308,18 +312,53 @@ body {
 }
 
 //end heart beat animation
-
+//==========================================
 //edit-page
 .edit-profile-wrapper {
   border-radius: 4px;
   border: 1px solid #e6e6e6;
 }
 
-.post-thumbnail {
+//end edit-page
+//==========================================
+//profile-page
+.profile-post-thumbnail {
+  position: relative;
   object-fit: cover;
   width: 100%;
   height: auto;
-  // height: 280px
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .post-action-group {
+    position: absolute;
+    z-index: -3;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+  }
+
+  &:hover::after {
+    background: rgba(0, 0, 0, 0.356);
+  }
+
+  &:hover .post-action-group {
+    z-index: 3;
+  }
 }
 
-//end edit-page
+//end profile-page

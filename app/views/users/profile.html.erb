@@ -26,9 +26,19 @@
             <% if(@user.posts.length > 0) %>
               <% @user.posts.each do |p| %>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
-                  <%= link_to "/x" do %>
-                    <div class="post-thumbnail">
+                  <%= link_to post_path(p) do %>
+                    <div class="profile-post-thumbnail">
                       <%= image_tag( p.image.to_s ) %>
+                      <div class="post-action-group d-flex justify-content-center align-items-center">
+                        <div class="mr-3">
+                          <i class="fa fa-heart-o fa-md text-white"></i>
+                          <span class="fa-md text-white"><%= p.likes.count %></span>
+                        </div>
+                        <div>
+                          <i class="fa fa-comments-o fa-md text-white"></i>
+                          <span class="fa-md text-white"><%= p.comments.count %></span>
+                        </div>
+                      </div>
                     </div>
                   <% end %>
                 </div>
