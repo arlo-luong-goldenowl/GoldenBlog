@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row edit-profile-wrapper bg-white">
+    <div class="col-md-3">
+      <ul class="list-group list-group-flush mt-4">
+        <li class="list-group-item border-bottom-0 border-top-0">
+          <%= link_to edit_user_path(current_user), class: "text-decoration-none text-dark" do %>
+            <h6>Edit profile</h6>
+          <% end %>
+        </li>
+        <li class="list-group-item border-bottom-0 border-top-0">
+          <%= link_to change_password_users_path, class: "text-decoration-none text-dark" do %>
+            <h6>Change your password</h6>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-9 gray-border-left pl-5">
+      <%= form_for(@user, html: { class: "mt-5", multipart: true}) do |f| %>
+        <%= render partial: "shared/error_alert", locals: { object: @user } %>
+        <%= render partial: "shared/alert" %>
+        <div class="form-group row">
+          <div class="avatar col-sm-2">
+            <%= image_tag( @user.image.present? ?  @user.image.to_s : 'default_avatar.png', id: "preview-image") %>
+          </div>
+          <div class="col-sm-6">
+            <div><%= @user.email %></div>
+            <a class="change-image-text text-cyan fw-600 text-decoration-none" href='#'> Change your image</a>
+          </div>
+        </div>
+        <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', class: "d-none", id: "customFile", "data-preview-image" => "#preview-image" %>
+        <div class="form-group row">
+          <%= f.label :email, class: "col-sm-2 col-form-label" do %>
+            <strong>Email</strong>
+          <% end %>
+          <div class="col-sm-6">
+            <div class="form-control borderless"><%= @user.email %></div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :role, class: "col-sm-2 col-form-label" do %>
+            <strong>Role</strong>
+          <% end %>
+          <div class="col-sm-6">
+            <div class="form-control borderless"><%= @user.role %></div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :name, class: "col-sm-2 col-form-label" do %>
+            <strong>Name</strong>
+          <% end %>
+          <div class="col-sm-6">
+            <%= f.text_field :name, type: "text", class: "form-control"%>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :password, class: "col-sm-2 col-form-label" do %>
+            <strong>Password</strong>
+          <% end %>
+          <div class="col-sm-6">
+            <%= f.text_field :password, type: "password", class: "form-control"%>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6 offset-sm-2">
+            <div class="mb-2"><i><span class="fw-600">Note:</span> You need confirm you password to change any infomation of account</i></div>
+            <%= f.submit "Submit", class: "btn btn-cyan fw-600 text-white disabled-focus"%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

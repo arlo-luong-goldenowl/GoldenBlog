@@ -2,7 +2,7 @@
   <div id="post-<%= post.id %>" class="post-wrapper bg-white mb-5">
     <div class="post-header gray-border-bottom d-flex flex-row align-items-center p-3">
       <div class="avatar">
-        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
+        <%= image_tag( post.user.image.present? ?  post.user.image.to_s : 'default_avatar.png' ) %>
       </div>
       <div class="ml-3"><%= post.user.name %></div>
       <div class="more-actions ml-auto">
