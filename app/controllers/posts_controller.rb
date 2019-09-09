@@ -27,11 +27,13 @@ class PostsController < ApplicationController
   def search
     @text = params[:post_search][:text]
     @search_result = Post
-      .joins(:category)
-      .where("LOWER(categories.name) like ?
-         or LOWER(posts.content) like ?
-         or LOWER(posts.title) like ?",
-        "%#{@text}%","%#{@text}%","%#{@text}%")
+                  .joins(:category)
+                  .where('
+                    LOWER(categories.name) like :keyword OR
+                    LOWER(posts.content) like :keyword OR
+                    LOWER(posts.title) like :keyword',
+                    keyword: "%#{@text}%"
+                  )
   end
 
   private
