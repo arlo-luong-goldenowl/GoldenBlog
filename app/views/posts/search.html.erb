@@ -1,1 +1,16 @@
-<h1>Search page</h1>
+<div class="container">
+  <div class="row p-5">
+    <div class="col-md-7">
+      <div class="row">
+        <h4 class="col-md-12 font-weight-light">Search: <%= @text %></h4>
+        <h5 class="col-md-12 font-weight-light"><%= @search_result.count %> results</h5>
+        <%= render partial: "post", collection: @search_result, as: :post %>
+      </div>
+    </div>
+    <div class="col-md-5 ">
+      <div class="position-sticky sticky-top">
+        <%= render "layouts/right_side_bar" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,10 +2,7 @@ class PostsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
   def index
-    @posts = Post.all
-      .select(:id, :user_id, :content, :image, :created_at)
-      .order(created_at: :desc)
-      .limit(5)
+    @posts = Post.all.order(created_at: :desc)
   end
 
   def show
@@ -28,7 +25,13 @@ class PostsController < ApplicationController
   end
 
   def search
-    puts " SEARCH in here "
+    @text = params[:post_search][:text]
+    @search_result = Post
+      .joins(:category)
+      .where("LOWER(categories.name) like ?
+         or LOWER(posts.content) like ?
+         or LOWER(posts.title) like ?",
+        "%#{@text}%","%#{@text}%","%#{@text}%")
   end
 
   private
