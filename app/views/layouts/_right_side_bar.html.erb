@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-12 d-flex align-items-center">
+    <%= image_tag( current_user.image.present? ?  'default_avatar.png' : 'default_avatar.png', class: "float-left circle-image", height: '55px', width: '55px' ) %>
+    <div class="ml-3">
+      <strong><%= current_user.email %></strong>
+      <br>
+      <%= current_user.name %>
+    </div>
+  </div>
+  <div class="col-md-12 latest-posts p-3 mt-3">
+    <p class="text-secondary"><strong>Latest posts</strong></p>
+  </div>
+</div>

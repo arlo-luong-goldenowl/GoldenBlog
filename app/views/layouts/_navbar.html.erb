@@ -1,34 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="background-color: #71da71;">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
+<nav class="navbar navbar-expand-lg navbar-light bg-white gray-border-bottom" style="background-color: #71da71;">
+  <div class="container ">
+    <a class="navbar-brand" href="#">
+      <%= image_tag( 'ooo_original.jpg', height: '56px' ) %>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="ml-auto search-wrapper p-2">
+        <i class="fa fa-search fa-md float-left mt-1 mr-2 text-secondary"></i>
+        <%= form_for(:post, url: search_posts_path, enforce_utf8: false, html: { method: :get, class: "float-left pt-1 pr-1" } ) do |f| %>
+          <%= f.text_field :text, type: "text", placeholder: "Search..." %>
+        <% end %>
+      </div>
+      <ul class="navbar-nav ml-auto">
         <% if logged_in? %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Account
-            </a>
-            <div class="dropdown-menu">
-              <%= link_to "Profile", profile_users_path, class: "dropdown-item" %>
-              <%= link_to "Logout", logout_path, class: "dropdown-item", method: :delete %>
-            </div>
+          <li class="nav-item">
+            <%= link_to "Profile", profile_users_path, class:"nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Logout", logout_path, method: :delete, class:"nav-link" %>
           </li>
         <% else %>
           <li class="nav-item">
             <a class="nav-link" href="#">Login</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sign up</a>
+          </li>
         <% end %>
-    </ul>
+      </ul>
+    </div>
   </div>
 </nav>

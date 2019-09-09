@@ -27,6 +27,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    puts " SEARCH in here "
+  end
+
   private
     def post_params
       params.require(:post).permit(:title, :content, :category_id, :image)

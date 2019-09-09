@@ -1,10 +1,12 @@
-<div class="container feeds">
-  <div class="row">
+<div class="container">
+  <div class="row p-5">
     <div class="col-md-7">
       <div class="row">
         <%= render @posts %>
       </div>
     </div>
-    <div class="col-md-5">RIGHT BAR</div>
+    <div class="col-md-5">
+      <%= render "layouts/right_side_bar" %>
+    </div>
   </div>
 </div>

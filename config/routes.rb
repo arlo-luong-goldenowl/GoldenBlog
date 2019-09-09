@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root   'pages#index'
+  root   'posts#index'
   get    '/signup',  to: 'users#new'
   get    '/login',   to: 'sessions#new'
   delete '/logout',  to: 'sessions#destroy'
@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments, only: [:create]
+    collection do
+      get 'search', to: 'posts#search'
+    end
     member do
       post :like_unlike, to: 'likes#like_unlike'
     end
