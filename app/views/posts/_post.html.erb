@@ -13,8 +13,16 @@
       <img src="<%= post.image %>" alt="">
     </div>
     <div class="post-action d-flex flex-row align-items-center pl-3 pt-3">
-      <%= link_to post, class: "like-btn text-decoration-none" do %>
-        <i class="fa fa-heart-o fa-large text-dark"></i>
+      <%= link_to like_unlike_post_path(post),
+        method: :post,
+        remote: true ,
+        class: "like-btn text-decoration-none" do
+      %>
+        <% if is_like_this_posts?(post.likes) %>
+          <i class="fa fa-heart fa-large text-danger"></i>
+        <% else %>
+          <i class="fa fa-heart-o fa-large text-dark"></i>
+        <% end %>
       <% end %>
       <%= link_to post, class: "comment-btn text-decoration-none" do %>
         <i class="ml-3 fa fa-comments fa-large text-dark"></i>
