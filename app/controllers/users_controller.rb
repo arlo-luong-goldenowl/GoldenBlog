@@ -27,9 +27,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(current_user.id)
     update_options = user_update_params
-    if params[:user][:image]
-      update_options = update_options.merge({image: params[:user][:image]})
-    end
+    update_options = update_options.merge({ image: params[:user][:image] }) if params[:user][:image]
     if(@user.update_attributes(update_options))
       flash[:success] = "Update profile Successful !"
       redirect_to edit_user_path(@user)
