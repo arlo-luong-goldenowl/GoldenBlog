@@ -3,26 +3,27 @@
     <div class="col-md-12 d-flex align-items-center">
       <%= image_tag( current_user.image.to_s, class: "float-left circle-image", height: '55px', width: '55px' ) %>
       <div class="ml-3">
-        <strong><%=  logged_in?current_user.email %></strong>
+        <strong><%=  current_user.email %></strong>
         <br>
         <%= current_user.name %>
       </div>
     </div>
   <% else %>
     <div class="col-md-12 d-flex align-items-center">
-      <%= image_tag( "default_avatar.png", class: "float-left circle-image", height: '55px', width: '55px' ) %>
+      <%= image_tag( get_img_from_cloud('default_avatar_ezjbiv.png'), class: "float-left circle-image", height: '55px', width: '55px' ) %>
       <div class="ml-3">
         <%= link_to "Login now!", login_path, class: "text-decoration-none text-dark" %>
       </div>
     </div>
   <% end %>
 
+
   <div class="col-md-12 latest-posts p-3 mt-3">
     <p class="text-secondary"><strong>Latest posts</strong></p>
     <% @latest_posts.each do |post| %>
       <div class="d-flex align-items-center mb-3">
         <div class="avatar">
-          <%= image_tag( post.user.image.present? ?  post.user.image.to_s : 'default_avatar.png' ) %>
+          <%= image_tag( post.user.image.present? ?  post.user.image.to_s : get_img_from_cloud('default_avatar_ezjbiv.png') ) %>
         </div>
         <div class="ml-2">
           <%= post.title %>

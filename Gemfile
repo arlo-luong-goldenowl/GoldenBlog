@@ -5,6 +5,7 @@ ruby '2.5.1'
 
 gem 'rails-timeago', '~> 2.0'
 gem 'carrierwave'
+gem 'cloudinary'
 gem 'omniauth-facebook'
 #bootstrap 4
 gem 'bootstrap', '~> 4.2.1'
