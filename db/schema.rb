@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_025239) do
     t.text "image"
     t.string "password_digest"
     t.string "remember_digest"
-    t.string "role"
+    t.string "role", default: "member"
     t.string "activation_digest"
     t.boolean "activated"
     t.datetime "activated_at"
