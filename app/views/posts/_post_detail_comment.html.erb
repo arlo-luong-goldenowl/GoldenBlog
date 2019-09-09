@@ -1,6 +1,6 @@
 <div class="comment d-flex">
   <div class="avatar">
-    <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
+    <%= image_tag( comment.user.image.present? ?  comment.user.image.to_s : 'default_avatar.png' ) %>
   </div>
   <div class="mt-2 ml-3">
     <span class="fw-600"><%= comment.user.name %></span>
