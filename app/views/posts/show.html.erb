@@ -10,7 +10,7 @@
         <div id="post-<%= @post.id %>" class="col-sm-12 col-md-4 p-0">
           <div class="post-header gray-border-bottom d-flex flex-row align-items-center p-4">
             <div class="avatar">
-              <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
+              <%= image_tag( @post.user.image.present? ?  @post.user.image.to_s : 'default_avatar.png' ) %>
             </div>
             <div class="ml-3 fw-600"><%= @post.user.name %></div>
             <div class="more-actions ml-auto">
@@ -21,7 +21,7 @@
             <div class="post-detail-comments pb-2">
               <div class="comment d-flex">
                 <div class="avatar">
-                  <img src="https://www.w3schools.com/howto/img_avatar.png" alt="">
+                  <%= image_tag( @post.user.image.present? ?  @post.user.image.to_s : 'default_avatar.png' ) %>
                 </div>
                 <div class="mt-2 ml-3">
                   <span class="fw-600"><%= @post.user.name %></span>

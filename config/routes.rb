@@ -8,8 +8,8 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get 'profile',         to: 'users#profile'
-      get 'change-password', to: 'users#change_password'
+      get 'profile',          to: 'users#profile'
+      get 'change-password',  to: 'users#change_password'
       post 'update-password', to: 'users#update_password'
     end
   end
