@@ -2,7 +2,10 @@ class PostsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
   def index
-    @posts = Post.all.order(created_at: :desc).limit(5)
+    @posts = Post.all
+      .select(:id, :user_id, :content, :image, :created_at)
+      .order(created_at: :desc)
+      .limit(5)
   end
 
   def show
