@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(current_user.id)
     update_options = user_update_params
-    if(params[:user][:image])
+    if params[:user][:image]
       update_options = update_options.merge({image: params[:user][:image]})
     end
     if(@user.update_attributes(update_options))
@@ -39,7 +39,6 @@ class UsersController < ApplicationController
   end
 
   def change_password
-    puts params
     render :change_password
   end
 
