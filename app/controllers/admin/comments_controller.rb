@@ -1,9 +1,7 @@
-class Admin::CommentsController < ApplicationController
-  before_action :logged_in_user
-  before_action :is_admin
+class Admin::CommentsController < Admin::BaseAdminController
 
   def index
-    @comments = Comment.paginate(page: params[:page], per_page: 8).order(created_at: :desc)
+    @comments = Comment.order(created_at: :desc).paginate(page: params[:page], per_page: 8)
   end
 
   def destroy

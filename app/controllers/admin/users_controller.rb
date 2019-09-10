@@ -1,8 +1,6 @@
-class Admin::UsersController < ApplicationController
-  before_action :logged_in_user
-  before_action :is_admin
+class Admin::UsersController < Admin::BaseAdminController
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 8).order(created_at: :desc)
+    @users = User.order(created_at: :desc).paginate(page: params[:page], per_page: 8)
   end
 end

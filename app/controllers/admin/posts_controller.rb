@@ -1,9 +1,7 @@
-class Admin::PostsController < ApplicationController
-  before_action :logged_in_user
-  before_action :is_admin
+class Admin::PostsController < Admin::BaseAdminController
 
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 8).order(created_at: :desc)
+    @posts = Post.order(created_at: :desc).paginate(page: params[:page], per_page: 8)
   end
 
   def show

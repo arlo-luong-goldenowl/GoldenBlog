@@ -1,9 +1,7 @@
-class Admin::CategoriesController < ApplicationController
-  before_action :logged_in_user
-  before_action :is_admin
+class Admin::CategoriesController < Admin::BaseAdminController
 
   def index
-    @categories = Category.paginate(page: params[:page], per_page: 8).order(created_at: :desc)
+    @categories = Category.order(created_at: :desc).paginate(page: params[:page], per_page: 8)
   end
 
   def new
