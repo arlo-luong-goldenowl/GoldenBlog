@@ -44,4 +44,8 @@ module SessionsHelper
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
+
+  def is_admin?
+    current_user.role == "admin"
+  end
 end

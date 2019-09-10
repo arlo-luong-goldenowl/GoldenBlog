@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pt-2">
   <%= render partial: "shared/alert" %>
   <div class="row">
     <div class="col-md-10 offset-md-1">
@@ -24,8 +24,8 @@
         <div class="col-md-12 mt-4">
           <h3 class="text-center font-weight-light mb-4">Posts</h3>
           <div class="row">
-            <% if(@user.posts.length > 0) %>
-              <% @user.posts.each do |p| %>
+            <% if(@posts.length > 0) %>
+              <% @posts.each do |p| %>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
                   <%= link_to post_path(p) do %>
                     <div class="profile-post-thumbnail">

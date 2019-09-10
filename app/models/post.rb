@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
   belongs_to :category
-  has_many :likes
-  has_many :comments, -> { order(created_at: :desc) } do
+  has_many :likes, dependent: :destroy
+  has_many :comments, -> { order(created_at: :desc) }, dependent: :destroy do
     def top_2
       limit(2)
     end

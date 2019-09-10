@@ -1,0 +1,43 @@
+<div class="p-3">
+  <h1>Posts management</h1>
+  <%= link_to "Add new post", new_admin_post_path, class: "btn btn-primary btn-sm mb-3" %>
+  <%= render partial: "shared/alert" %>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Content</th>
+      <th scope="col">Category</th>
+      <th scope="col">Status</th>
+      <th scope="col">Image</th>
+      <th scope="col">Likes</th>
+      <th scope="col">Comments</th>
+      <th scope="col">Post by</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each_with_index do |post, index| %>
+      <tr>
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= post.id %></td>
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= post.category.name %></td>
+        <td><%= post.status %></td>
+        <td><%= image_tag(post.image.to_s, width: '50px', height: '50px') %></td>
+        <td><%= post.likes.count %></td>
+        <td><%= post.comments.count %></td>
+        <td><%= post.user.email %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_post_path(post), class: "btn btn-warning btn-sm mb-1" %>
+          <%= link_to "Delete", admin_post_path(post), method: :delete, data: { confirm: "sure ?"}, class: "btn btn-danger btn-sm mb-1" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @posts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+</div>

@@ -1,0 +1,31 @@
+<div class="p-3">
+  <h1>Comments management</h1>
+  <%= render partial: "shared/alert" %>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">id</th>
+      <th scope="col">Content</th>
+      <th scope="col">Post id</th>
+      <th scope="col">Comment by</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @comments.each_with_index do |comment, index| %>
+      <tr>
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= comment.id %></td>
+        <td><%= comment.content %></td>
+        <td><%= comment.post.id %></td>
+        <td><%= comment.user.email %></td>
+        <td>
+          <%= link_to "Delete", admin_comment_path(comment), method: :delete, data: { confirm: "Are you sure to delete this item ?"}, class: "btn btn-danger btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @comments, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+</div>

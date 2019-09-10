@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(request.env['omniauth.auth'])
     log_in(user)
     remember(user)
-    flash[:success] = "Welcome to my app"
+    flash[:success] = "Welcome to Golden blog"
     redirect_to profile_users_path
   end
 end
