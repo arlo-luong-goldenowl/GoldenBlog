@@ -16,8 +16,10 @@ class UsersController < ApplicationController
   end
 
   def profile
+    puts params
     @user = User.find(current_user.id)
-    @posts = @user.posts.where(status: :approved)
+    @status = params[:status]
+    @posts = @user.posts.where(status: @status).order(created_at: :desc).paginate(page: params[:page], per_page: 9)
     render :profile
   end
 
