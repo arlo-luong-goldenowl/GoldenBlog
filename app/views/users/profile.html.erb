@@ -46,11 +46,7 @@
             <% if(@posts.length > 0) %>
               <% @posts.each do |post| %>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
-                  <% if post.status == "approved" %>
-                    <a href="<%= post_path(post) %>" >
-                  <% else %>
-                    <a>
-                  <% end %>
+                  <div>
                     <div class="profile-post-thumbnail">
                       <%= image_tag( post.image.to_s ) %>
                       <div class="post-action-group d-flex justify-content-center align-items-center">
@@ -63,8 +59,25 @@
                           <span class="fa-md text-white"><%= post.comments.count %></span>
                         </div>
                       </div>
+                      <div class="post-action-group d-flex justify-content-end align-items-start">
+                        <div class="mr-1 mt-1">
+                          <%= link_to post_path(post), class: "text-decoration-none" do %>
+                            <i class="fa fa-eye fa-md text-white"></i>
+                          <% end %>
+                        </div>
+                        <div class="mr-1 mt-1">
+                          <%= link_to edit_post_path(post), class: "text-decoration-none" do %>
+                            <i class="fa fa-pencil fa-md text-white"></i>
+                          <% end %>
+                        </div>
+                        <div class="mr-1 mt-1">
+                          <%= link_to post_path(post), method: :delete, data: { confirm: "Sure to delete this post ?"}, class: "text-decoration-none" do %>
+                            <i class="fa fa-close fa-md text-white"></i>
+                          <% end %>
+                        </div>
+                      </div>
                     </div>
-                  </a>
+                  </div>
                 </div>
               <% end %>
             <% elsif @user.posts.any? %>
