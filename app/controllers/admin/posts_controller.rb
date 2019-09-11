@@ -1,11 +1,11 @@
 class Admin::PostsController < Admin::BaseAdminController
+  before_action :prepare_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.order(created_at: :desc).paginate(page: params[:page], per_page: 8)
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def new
@@ -25,12 +25,10 @@ class Admin::PostsController < Admin::BaseAdminController
   end
 
   def edit
-    @post = Post.find(params[:id])
     @categories = Category.all
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
       flash[:success] = 'Post was successfully updated.'
       redirect_to admin_posts_path
@@ -41,7 +39,6 @@ class Admin::PostsController < Admin::BaseAdminController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     if @post.destroy
       flash[:success] = 'Post was successfully deleted.'
       redirect_to admin_posts_path
@@ -56,5 +53,9 @@ class Admin::PostsController < Admin::BaseAdminController
 
   def post_params
     params.require(:post).permit(:title, :content, :category_id, :image, :status)
+  end
+
+  def prepare_post
+    @post = Post.find(params[:id])
   end
 end
