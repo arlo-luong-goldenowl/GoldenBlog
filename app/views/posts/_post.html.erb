@@ -6,7 +6,7 @@
       <% end %>
       <%= link_to post.user.name, user_path(post.user), class: "ml-3 text-decoration-none text-dark fw-600" %>
       <div class="more-actions ml-auto">
-        <i class="fa fa-ellipsis-h fa-large"></i>
+
       </div>
     </div>
     <div class="post-thumbnail">
@@ -36,7 +36,10 @@
       <div class="post-body">
         <span class="fw-600"> <%= link_to post.user.name, user_path(post.user), class: "text-decoration-none text-dark fw-600" %></span>
         <span class="font-weight-normal">
-          <%= post.content %>
+          <% if post.content.length > 100 %>
+            <%= "#{post.content[0..100]}..." %>
+            <%= link_to "See more", post_path(post) %>
+          <% end %>
         </span>
       </div>
     </div>

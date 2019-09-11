@@ -4,18 +4,20 @@
     <div class="col-md-10 offset-md-1">
       <div class="row mt-5">
         <div class="col-md-12">
-          <div class="row">
-            <div class="col-sm-4 col-md-4">
+          <div class="row ">
+            <div class="col-sm-4 col-md-4 text-center text-sm-left text-md-left text-lg-left text-xl-left">
               <%= image_tag( @user.image.present? ?  @user.image.to_s : 'default_avatar.png', class: 'circle-image user-profile-image' ) %>
             </div>
             <div class="col-sm-4 col-md-4">
               <div class="row">
                 <div class="col-md-12">
-                  <h4 class="font-weight-light"><%= @user.email %></h4>
-                  <h5 class="font-weight-light"><%= @user.name %></h5>
+                  <h4 class="font-weight-light text-center text-sm-left text-md-left text-lg-left text-xl-left">
+                    <%= @user.email %>
+                  </h4>
+                  <h5 class="font-weight-light text-center text-sm-left text-md-left text-lg-left text-xl-left"><%= @user.name %></h5>
                 </div>
-                <div class="col-md-4 mt-2"><%= @user.posts.count %> Posts</div>
-                <div class="col-md-4 mt-2"><%= @user.posts.count %> Likes</div>
+                <div class="col-md-4 mt-2 text-center text-sm-left text-md-left text-lg-left text-xl-left"><%= @user.posts.count %> Posts</div>
+                <div class="col-md-4 mt-2 text-center text-sm-left text-md-left text-lg-left text-xl-left"><%= @user.posts.count %> Likes</div>
                 <%= link_to( "Edit profile", edit_user_path(@user), class: "col-md-12 mt-3 btn btn-cyan fw-600 text-white disabled-focus" )%>
               </div>
             </div>
