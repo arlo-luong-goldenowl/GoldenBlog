@@ -2,7 +2,7 @@ class Admin::BaseAdminController < ActionController::Base
   layout "admin_layout"
   protect_from_forgery with: :exception
   before_action :logged_in_user
-  before_action :is_admin
+  before_action :check_permission
 
   include SessionsHelper
 
@@ -15,7 +15,7 @@ class Admin::BaseAdminController < ActionController::Base
     end
   end
 
-  def is_admin
+  def check_permission
     unless is_admin?
       flash[:danger] = "Permission denied to access this url"
       redirect_to profile_users_path(status: :new)
