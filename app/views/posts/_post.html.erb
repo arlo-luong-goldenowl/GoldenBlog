@@ -1,10 +1,10 @@
 <div class="col-md-12 mb-5">
   <div id="post-<%= post.id %>" class="post-wrapper bg-white">
     <div class="post-header gray-border-bottom d-flex flex-row align-items-center p-3">
-      <div class="avatar">
+      <%= link_to user_path(post.user), class: "avatar" do %>
         <%= image_tag( post.user.image.present? ?  post.user.image.to_s : 'default_avatar.png' ) %>
-      </div>
-      <div class="ml-3"><%= post.user.name %></div>
+      <% end %>
+      <%= link_to post.user.name, user_path(post.user), class: "ml-3 text-decoration-none text-dark fw-600" %>
       <div class="more-actions ml-auto">
         <i class="fa fa-ellipsis-h fa-large"></i>
       </div>
@@ -34,7 +34,7 @@
     <div class="post-content pl-3">
       <div class="post-likes fw-600 mt-1"><%= post.likes.count %> likes</div>
       <div class="post-body">
-        <span class="fw-600"><%= post.user.name %></span>
+        <span class="fw-600"> <%= link_to post.user.name, user_path(post.user), class: "text-decoration-none text-dark fw-600" %></span>
         <span class="font-weight-normal">
           <%= post.content %>
         </span>

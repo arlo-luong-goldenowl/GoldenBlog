@@ -9,10 +9,10 @@
         </div>
         <div id="post-<%= @post.id %>" class="col-sm-12 col-md-4 p-0">
           <div class="post-header gray-border-bottom d-flex flex-row align-items-center p-4">
-            <div class="avatar">
+            <%= link_to user_path(@post.user), class: "avatar" do %>
               <%= image_tag( @post.user.image.present? ?  @post.user.image.to_s : 'default_avatar.png' ) %>
-            </div>
-            <div class="ml-3 fw-600"><%= @post.user.name %></div>
+            <% end %>
+            <span class="fw-600 ml-3"> <%= link_to @post.user.name, user_path(@post.user), class: "text-decoration-none text-dark fw-600" %></span>
             <div class="more-actions ml-auto">
               <i class="fa fa-ellipsis-h fa-large"></i>
             </div>
@@ -20,11 +20,11 @@
           <div class="post-detail-comments-wrapper pl-4 pr-5 pt-3 ">
             <div class="post-detail-comments pb-2">
               <div class="comment d-flex">
-                <div class="avatar">
+                <%= link_to user_path(@post.user), class: "avatar" do %>
                   <%= image_tag( @post.user.image.present? ?  @post.user.image.to_s : 'default_avatar.png' ) %>
-                </div>
+                <% end %>
                 <div class="mt-2 ml-3">
-                  <span class="fw-600"><%= @post.user.name %></span>
+                  <span class="fw-600"> <%= link_to @post.user.name, user_path(@post.user), class: "text-decoration-none text-dark fw-600" %></span>
                   <span class="font-weight-normal">
                     <%= @post.content %>
                   </span>

@@ -16,11 +16,9 @@
       </div>
     </div>
   <% end %>
-
-
   <div class="col-md-12 latest-posts p-3 mt-3">
     <p class="text-secondary"><strong>Latest posts</strong></p>
-    <% if @latest_posts.any? %>
+    <% if !@latest_posts.any? %>
       <p class="text-secondary">No more posts</p>
     <% else %>
       <% @latest_posts.each do |post| %>

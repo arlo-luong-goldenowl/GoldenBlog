@@ -16,41 +16,17 @@
                 </div>
                 <div class="col-md-4 mt-2"><%= @user.posts.count %> Posts</div>
                 <div class="col-md-4 mt-2"><%= @user.posts.count %> Likes</div>
-                <%= link_to( "Edit profile", edit_user_path(@user), class: "col-md-12 mt-3 btn btn-cyan fw-600 text-white disabled-focus" )%>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-12 mt-4">
-          <!-- <h3 class="text-center font-weight-light mb-4">Posts</h3> -->
+          <h3 class="text-center font-weight-light mb-4">Posts</h3>
           <div class="row">
-            <div class="col-md-4 text-center mb-4">
-              <%= link_to profile_users_path(status: :new), class: "text-decoration-none text-dark" do %>
-                <i class="fa fa-large fa-gears"></i>
-                <div>Pending posts</div>
-              <% end %>
-            </div>
-            <div class="col-md-4 text-center mb-4">
-              <%= link_to profile_users_path(status: :approved), class: "text-decoration-none text-dark" do %>
-                <i class="fa fa-large fa-check-square"></i>
-                <div>Approved posts</div>
-              <% end %>
-            </div>
-            <div class="col-md-4 text-center mb-4">
-              <%= link_to profile_users_path(status: :rejected), class: "text-decoration-none text-dark" do %>
-                <i class="fa fa-large fa-ban"></i>
-                <div>Rejected posts</div>
-              <% end %>
-            </div>
-
             <% if(@posts.length > 0) %>
               <% @posts.each do |post| %>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
-                  <% if post.status == "approved" %>
-                    <a href="<%= post_path(post) %>" >
-                  <% else %>
-                    <a>
-                  <% end %>
+                  <%= link_to post_path(post) do %>
                     <div class="profile-post-thumbnail">
                       <%= image_tag( post.image.to_s ) %>
                       <div class="post-action-group d-flex justify-content-center align-items-center">
@@ -64,19 +40,17 @@
                         </div>
                       </div>
                     </div>
-                  </a>
+                  <% end %>
                 </div>
               <% end %>
             <% elsif @user.posts.any? %>
-              <%= link_to new_post_path, class: "col-md-12 text-center text-decoration-none text-secondary" do %>
+              <div class="col-md-12 text-center text-decoration-none text-secondary">
                 <h3 class="mt-5 font-weight-light " >
                   <i>No more posts</i>
                   <br>
-                  <i>Add new post now</i>
-                  <br>
                   <i class="fa fa-camera-retro fa-6"></i>
                 </h3>
-              <% end %>
+              </div>
             <% end %>
           </div>
           <%= will_paginate(@posts, list_classes: %w(pagination justify-content-center)) %>

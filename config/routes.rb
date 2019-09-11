@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get '/profile/:status',  to: 'users#profile', as: 'profile'
+      get '/profile/:status', to: 'users#profile', as: 'profile'
       get 'change-password',  to: 'users#change_password'
       post 'update-password', to: 'users#update_password'
     end

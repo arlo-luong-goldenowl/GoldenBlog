@@ -15,8 +15,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+    # redirect to user profile page if user info is current logged user
+    if(current_user && params[:id].to_i == current_user.id)
+      return redirect_to profile_users_path(status: :new)
+    end
+
+    @posts = @user.posts.where(status: :approved).order(created_at: :desc).paginate(page: params[:page], per_page: 9)
+  end
+
   def profile
-    puts params
     @user = User.find(current_user.id)
     @status = params[:status]
     @posts = @user.posts.where(status: @status).order(created_at: :desc).paginate(page: params[:page], per_page: 9)
