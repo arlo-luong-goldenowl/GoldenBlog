@@ -16,7 +16,6 @@ class UsersController < ApplicationController
   end
 
   def profile
-    puts params
     @user = User.find(current_user.id)
     @status = params[:status]
     @posts = @user.posts.where(status: @status).order(created_at: :desc).paginate(page: params[:page], per_page: 9)
@@ -89,4 +88,5 @@ class UsersController < ApplicationController
   def user_update_params
     params.require(:user).permit(:name, :password)
   end
+
 end

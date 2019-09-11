@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by(id: params[:id], status: :approved)
+    @post = Post.find_by(id: params[:id])
 
     return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if !@post
   end
@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
+
       redirect_to posts_path
     else
       @categories = Category.all
@@ -55,7 +56,7 @@ class PostsController < ApplicationController
                     LOWER(categories.name) like :keyword OR
                     LOWER(posts.content) like :keyword OR
                     LOWER(posts.title) like :keyword',
-                    keyword: "%#{@text}%"
+                    keyword: "%#{@text.downcase}%"
                   )
   end
 
