@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       log_in(user)
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:success] = "Welcome to my app"
-      redirect_to profile_users_path
+      redirect_to profile_users_path(status: :new)
     else
       flash.now[:danger] = "Invalid email/password combination"
       render :new
@@ -26,6 +26,6 @@ class SessionsController < ApplicationController
     log_in(user)
     remember(user)
     flash[:success] = "Welcome to Golden blog"
-    redirect_to profile_users_path
+    redirect_to profile_users_path(status: :new)
   end
 end

@@ -18,7 +18,7 @@ class Admin::BaseAdminController < ActionController::Base
   def check_permission
     unless is_admin?
       flash[:danger] = "Permission denied to access this url"
-      redirect_to profile_users_path
+      redirect_to profile_users_path(status: :new)
     end
   end
 end

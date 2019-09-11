@@ -1,9 +1,9 @@
 <div class="comment d-flex">
-  <div class="avatar">
+  <%= link_to user_path(comment.user), class: "avatar" do %>
     <%= image_tag( comment.user.image.present? ?  comment.user.image.to_s : 'default_avatar.png' ) %>
-  </div>
+  <% end %>
   <div class="mt-2 ml-3">
-    <span class="fw-600"><%= comment.user.name %></span>
+    <span class="fw-600"> <%= link_to comment.user.name, user_path(comment.user), class: "text-decoration-none text-dark fw-600" %></span>
     <span class="font-weight-normal">
       <%= comment.content %>
     </span>

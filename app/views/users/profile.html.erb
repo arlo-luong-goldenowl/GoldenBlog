@@ -22,40 +22,77 @@
           </div>
         </div>
         <div class="col-md-12 mt-4">
-          <h3 class="text-center font-weight-light mb-4">Posts</h3>
+          <!-- <h3 class="text-center font-weight-light mb-4">Posts</h3> -->
           <div class="row">
+            <div class="col-md-4 text-center mb-4">
+              <%= link_to profile_users_path(status: :new), class: "text-decoration-none text-dark #{@status == 'new' ? 'font-weight-bold' : ''}" do %>
+                <i class="fa fa-large fa-gears"></i>
+                <div>Pending posts</div>
+              <% end %>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+              <%= link_to profile_users_path(status: :approved), class: "text-decoration-none text-dark #{@status == 'approved' ? 'font-weight-bold' : ''}" do %>
+                <i class="fa fa-large fa-check-square"></i>
+                <div>Approved posts</div>
+              <% end %>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+              <%= link_to profile_users_path(status: :rejected), class: "text-decoration-none text-dark #{@status == 'rejected' ? 'font-weight-bold' : ''}" do %>
+                <i class="fa fa-large fa-ban"></i>
+                <div>Rejected posts</div>
+              <% end %>
+            </div>
+
             <% if(@posts.length > 0) %>
-              <% @posts.each do |p| %>
+              <% @posts.each do |post| %>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
-                  <%= link_to post_path(p) do %>
+                  <div>
                     <div class="profile-post-thumbnail">
-                      <%= image_tag( p.image.to_s ) %>
+                      <%= image_tag( post.image.to_s ) %>
                       <div class="post-action-group d-flex justify-content-center align-items-center">
                         <div class="mr-3">
                           <i class="fa fa-heart-o fa-md text-white"></i>
-                          <span class="fa-md text-white"><%= p.likes.count %></span>
+                          <span class="fa-md text-white"><%= post.likes.count %></span>
                         </div>
                         <div>
                           <i class="fa fa-comments-o fa-md text-white"></i>
-                          <span class="fa-md text-white"><%= p.comments.count %></span>
+                          <span class="fa-md text-white"><%= post.comments.count %></span>
+                        </div>
+                      </div>
+                      <div class="post-action-group d-flex justify-content-end align-items-start">
+                        <div class="mr-1 mt-1">
+                          <%= link_to post_path(post), class: "text-decoration-none" do %>
+                            <i class="fa fa-eye fa-md text-white"></i>
+                          <% end %>
+                        </div>
+                        <div class="mr-1 mt-1">
+                          <%= link_to edit_post_path(post), class: "text-decoration-none" do %>
+                            <i class="fa fa-pencil fa-md text-white"></i>
+                          <% end %>
+                        </div>
+                        <div class="mr-1 mt-1">
+                          <%= link_to post_path(post), method: :delete, data: { confirm: "Sure to delete this post ?"}, class: "text-decoration-none" do %>
+                            <i class="fa fa-close fa-md text-white"></i>
+                          <% end %>
                         </div>
                       </div>
                     </div>
-                  <% end %>
+                  </div>
                 </div>
               <% end %>
-            <% else %>
+            <% elsif @user.posts.any? %>
               <%= link_to new_post_path, class: "col-md-12 text-center text-decoration-none text-secondary" do %>
-                <h3 class="font-weight-light " >
+                <h3 class="mt-5 font-weight-light " >
                   <i>No more posts</i>
                   <br>
-                  <i>Add your first post now</i>
+                  <i>Add new post now</i>
                   <br>
                   <i class="fa fa-camera-retro fa-6"></i>
                 </h3>
               <% end %>
             <% end %>
           </div>
+          <%= will_paginate(@posts, list_classes: %w(pagination justify-content-center)) %>
         </div>
       </div>
     </div>
