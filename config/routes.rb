@@ -24,5 +24,13 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    get '/', to: redirect('/admin/posts')
+    resources :users
+    resources :posts
+    resources :categories
+    resources :comments
+  end
+
   resources :sessions, only: [:create]
 end

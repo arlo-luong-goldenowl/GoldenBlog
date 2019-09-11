@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
   end
 
   def get_latest_posts
-    @latest_posts = Post.all
+    @latest_posts = Post
+      .where(status: :approved)
       .order(created_at: :desc)
       .limit(5)
   end

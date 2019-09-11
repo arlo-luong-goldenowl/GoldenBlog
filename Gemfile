@@ -7,6 +7,7 @@ gem 'rails-timeago', '~> 2.0'
 gem 'carrierwave'
 gem 'cloudinary'
 gem 'omniauth-facebook'
+gem 'will_paginate-bootstrap4'
 #bootstrap 4
 gem 'bootstrap', '~> 4.2.1'
 #jquery

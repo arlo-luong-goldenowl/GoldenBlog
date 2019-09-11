@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GoldenBlog</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="d-flex" id="wrapper">
+      <%= render "layouts/admin_left_sidebar" %>
+      <div id="page-content-wrapper">
+        <%= render "layouts/admin_navbar" %>
+        <div class="container-fluid">
+          <%= yield %>
+        </div>
+    </div>
+  </body>
+</html>
