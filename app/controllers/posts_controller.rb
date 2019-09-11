@@ -45,6 +45,7 @@ class PostsController < ApplicationController
 
     if @post.update_attributes(post_params)
       flash[:success] = 'Post was successfully edited.'
+      MailNotificationWorker.perform_async(@post.id, "update") if post_params[:status] == "approved"
       redirect_to profile_users_path(status: :new)
     else
       @categories = Category.all
@@ -54,12 +55,14 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+
     # render error page if post no exist or doesn't belong to
     if(!@post || @post.user.id != current_user.id)
       return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
     end
 
     if @post.destroy
+      MailNotificationWorker.perform_async(@post.id, "destroy") if post_params[:status] == "approved"
       flash[:success] = 'Post was successfully deleted.'
       redirect_to profile_users_path(status: :new)
     else

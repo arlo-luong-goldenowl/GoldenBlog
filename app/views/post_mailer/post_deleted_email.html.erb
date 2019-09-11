@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Hi, this post from Golden Blog was deleted because of some reasons</h3>
+    <hr/>
+    <p>Author: <%= @post.user.email  %></p>
+    <br>
+    <p><%= @post.title %></p>
+    <%= image_tag( @post.image.to_s ) %>
+    <p><%= @post.content %></p>
+  </body>
+</html>
