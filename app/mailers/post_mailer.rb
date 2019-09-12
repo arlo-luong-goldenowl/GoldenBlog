@@ -8,9 +8,10 @@ class PostMailer < ApplicationMailer
     mail to: @user.email, subject: "Golden blog notification"
   end
 
-  def post_deleted_email(user, post)
+  def post_deleted_email(user, post_title, author)
     @user = user
-    @post = post
+    @post_title = post_title
+    @author = author
     @current_date = Time.now.strftime("%d/%m/%Y %H:%M")
     mail to: @user.email, subject: "Golden blog notification"
   end

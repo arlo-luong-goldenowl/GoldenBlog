@@ -2,16 +2,17 @@ class MailNotificationWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
 
-  def perform(post_id, type)
+  def perform(type, *argu)
     users = User.all
-    post = Post.find(post_id)
     users.each do |user|
       if type == "new"
-        # PostMailer.post_released_email(user, post).deliver
+        PostMailer.post_released_email(user, post).deliver
       elsif type == "update"
-        # PostMailer.post_edited_email(user, post).deliver
+        PostMailer.post_edited_email(user, post).deliver
       else
-        # PostMailer.post_deleted_email(user).deliver
+        title = argu[0]
+        author = argu[1]
+        PostMailer.post_deleted_email(user, title, author).deliver
       end
     end
   end
