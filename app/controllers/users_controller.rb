@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:profile, :edit, :change_password, :update_password]
+  before_action :prepare_user, only: [:show]
+  before_action :prepare_current_user, only: [:profile, :edit, :update]
 
   def new
     @user = User.new
@@ -16,7 +18,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     # redirect to user profile page if user info is current logged user
     if(current_user && params[:id].to_i == current_user.id)
       return redirect_to profile_users_path(status: :new)
@@ -26,19 +27,16 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @user = User.find(current_user.id)
     @status = params[:status]
     @posts = @user.posts.where(status: @status).order(created_at: :desc).paginate(page: params[:page], per_page: 9)
     render :profile
   end
 
   def edit
-    @user = current_user
   end
 
   def update
-    @user = User.find(current_user.id)
-    update_options = user_update_params
+    update_options = user_params
     update_options = update_options.merge({ image: params[:user][:image] }) if params[:user][:image]
     if(@user.update_attributes(update_options))
       flash[:success] = "Update profile Successful !"
@@ -95,8 +93,12 @@ class UsersController < ApplicationController
     params.require(:user).permit()
   end
 
-  def user_update_params
-    params.require(:user).permit(:name, :password)
+  def prepare_user
+    @user = User.find(params[:id])
+  end
+
+  def prepare_current_user
+    @user = User.find(current_user.id)
   end
 
 end

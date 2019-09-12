@@ -1,3 +1,5 @@
-Hi <%= @user.name %>
-Send at <%= @current_date %>
-Sample mail sent using smtp.
+Hi, Post from Golden Blog had some changes
+
+Title: <% @post.title %>
+Author: <%= @post.user.email  %>
+Content: <%= @post.content %>

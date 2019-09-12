@@ -6,8 +6,12 @@ class MailNotificationWorker
     users = User.all
     users.each do |user|
       if type == "new"
+        post_id = argu[0]
+        post = Post.find(post_id)
         PostMailer.post_released_email(user, post).deliver
       elsif type == "update"
+        post_id = argu[0]
+        post = Post.find(post_id)
         PostMailer.post_edited_email(user, post).deliver
       else
         title = argu[0]

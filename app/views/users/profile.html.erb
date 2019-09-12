@@ -60,11 +60,13 @@
                         </div>
                       </div>
                       <div class="post-action-group d-flex justify-content-end align-items-start">
-                        <div class="mr-1 mt-1">
-                          <%= link_to post_path(post), class: "text-decoration-none" do %>
-                            <i class="fa fa-eye fa-md text-white"></i>
-                          <% end %>
-                        </div>
+                        <% if post.status == "approved" %>
+                          <div class="mr-1 mt-1">
+                            <%= link_to post_path(post), class: "text-decoration-none" do %>
+                              <i class="fa fa-eye fa-md text-white"></i>
+                            <% end %>
+                          </div>
+                        <% end %>
                         <div class="mr-1 mt-1">
                           <%= link_to edit_post_path(post), class: "text-decoration-none" do %>
                             <i class="fa fa-pencil fa-md text-white"></i>
