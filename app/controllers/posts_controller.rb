@@ -1,14 +1,16 @@
 class PostsController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
+  before_action :prepage_post, only: [:show, :edit, :update, :destroy]
+  before_action :check_post_exist, only: [:show, :edit, :update, :destroy]
+  before_action :check_post_author_with_current_user, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.where(status: :approved)
   end
 
   def show
-    @post = Post.find_by(id: params[:id], status: :approved)
-
-    return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if !@post
+    # only access post detail page if that post was approved
+    return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @post.status != "approved"
   end
 
   def new
@@ -27,21 +29,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find_by(id: params[:id])
     @categories = Category.all
-    # render error page if post no exist or doesn't belong to user
-    if(!@post || @post.user.id != current_user.id)
-      return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
-    end
   end
 
   def update
-    @post = Post.find_by(id: params[:id], status: :approved)
-    # render error page if post no exist or doesn't belong to user
-    if(!@post || @post.user.id != current_user.id)
-      return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
-    end
-
     if @post.update_attributes(post_params)
       flash[:success] = 'Post was successfully edited.'
       redirect_to profile_users_path(status: :new)
@@ -52,12 +43,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    # render error page if post no exist or doesn't belong to
-    if(!@post || @post.user.id != current_user.id)
-      return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found)
-    end
-
     if @post.destroy
       flash[:success] = 'Post was successfully deleted.'
       redirect_to profile_users_path(status: :new)
@@ -66,7 +51,6 @@ class PostsController < ApplicationController
       redirect_to profile_users_path(status: :new)
     end
   end
-
 
   def search
     @text = params[:post_search][:text]
@@ -82,7 +66,20 @@ class PostsController < ApplicationController
   end
 
   private
-    def post_params
-      params.require(:post).permit(:title, :content, :category_id, :image)
-    end
+
+  def post_params
+    params.require(:post).permit(:title, :content, :category_id, :image)
+  end
+
+  def prepage_post
+    @post = Post.find_by(id: params[:id])
+  end
+
+  def check_post_exist
+    return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if !@post
+  end
+
+  def check_post_author_with_current_user
+    return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @post.user != current_user
+  end
 end
