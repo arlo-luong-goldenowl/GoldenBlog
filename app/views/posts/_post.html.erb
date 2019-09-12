@@ -28,7 +28,7 @@
         <i class="ml-3 fa fa-comments fa-large text-dark"></i>
       <% end %>
        <%= link_to post, class: "share-btn text-decoration-none" do %>
-        <i class="ml-3 fa fa-share fa-large text-dark"></i>
+        <%= social_share_button_tag(post.title, desc: post.content, url: post_url(post), image: "https://res.cloudinary.com/deku52155/image/upload/v1568264889/wriqgvalkzapvtbvmbcb.jpg") %>
       <% end %>
     </div>
     <div class="post-content pl-3">

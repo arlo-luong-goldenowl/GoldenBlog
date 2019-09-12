@@ -2,5 +2,35 @@
 @import url('https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css');
 $font-family-base: 'Roboto', sans-serif;
 @import "bootstrap";
-@import "_custom.scss";
 @import "_simple_sidebar.scss";
+@import "social-share-button";
+@import "_custom.scss";
+
+.social-share-button {
+  font-size: 30px;
+
+  .ssb-icon {
+    color: #343a40;
+  }
+
+  .ssb-facebook {
+    background-image:none;
+    width: 30px;
+    height: 30px;
+    margin-left: 1rem !important;
+    display: inline-block;
+    font: normal normal normal 14px/1 "FontAwesome";
+    font-size: inherit;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+
+    &:before {
+      content: "\f2f0";
+    }
+  }
+
+}
