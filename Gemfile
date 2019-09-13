@@ -5,6 +5,7 @@ ruby '2.5.1'
 
 gem 'http'
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 gem 'carrierwave'
 gem 'cloudinary'
 gem 'omniauth-facebook'
