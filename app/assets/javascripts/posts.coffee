@@ -15,6 +15,27 @@ $(document).on('ready turbolinks:load', ->
       $('.post-detail-comments-wrapper').css('height': new_height)
       $(this).css('height', scroll_height + 'px')
   )
+
+  $('.share-btn').on('click',(e) ->
+    e.preventDefault()
+    redirect_link = $(this).data('href')
+    post_id = $(this).data('id')
+    FB.ui({ method: 'share', href: redirect_link }, (response) ->
+      if response && Array.isArray(response)
+        $.ajax({
+          url: "/posts/#{post_id}/share",
+          type: "post",
+          dataType: "json",
+          success: (data) ->
+            post_element = $("#post-#{post_id}")
+            post_shares_element = post_element.find(".post-shares")
+            post_shares_element.html("#{data.shares_counter} shares");
+          ,
+          error: (error) ->
+        })
+    )
+  )
+
 )
 
 

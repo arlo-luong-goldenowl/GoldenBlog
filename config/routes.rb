@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
     member do
       post :like_unlike, to: 'likes#like_unlike'
+      post :share,       to: 'shares#index'
     end
   end
 
