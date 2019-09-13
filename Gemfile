@@ -3,8 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
-gem 'social-share-button'
-gem 'rails-timeago', '~> 2.0'
+gem 'http'
+gem 'sidekiq'
 gem 'carrierwave'
 gem 'cloudinary'
 gem 'omniauth-facebook'

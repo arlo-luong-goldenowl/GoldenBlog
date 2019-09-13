@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', ->
+$(document).on('ready turbolinks:load', ->
   $('#customFile').bind('change', ->
     previewImageId = $(this).data('preview-image')
     set_image_to_preview(this,previewImageId)
