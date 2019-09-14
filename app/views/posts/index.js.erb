@@ -1,0 +1,6 @@
+$('.post-list').append('<%= j render(@posts) %>');
+if("<%= @posts.next_page %>".length > 0){
+  $('.pagination-wrapper').html("<%= j will_paginate(@posts) %>").addClass("d-none")
+} else {
+  $('.pagination-wrapper').remove();
+}

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :check_post_author_with_current_user, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.where(status: :approved)
+    @posts = Post.where(status: :approved).order(created_at: :desc).paginate(page: params[:page], per_page: 6)
   end
 
   def show

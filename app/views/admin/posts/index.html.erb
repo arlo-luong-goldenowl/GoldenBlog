@@ -5,7 +5,6 @@
   <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">id</th>
       <th scope="col">Title</th>
       <th scope="col">Content</th>
@@ -21,8 +20,7 @@
   <tbody>
     <% @posts.each_with_index do |post, index| %>
       <tr>
-        <th scope="row"><%= index + 1 %></th>
-        <td><%= post.id %></td>
+        <td scope="row"><%= post.id %></td>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= post.category.name %></td>
@@ -39,4 +37,5 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @posts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer  %>
 </div>
