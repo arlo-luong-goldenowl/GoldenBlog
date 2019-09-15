@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :comments
+  has_many :shares
 
 
   # Returns true if the given token matches the digest of attribute
