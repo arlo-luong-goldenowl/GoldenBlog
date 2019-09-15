@@ -6,22 +6,22 @@
         <%= render partial: "shared/error_alert", locals: { object: @user } %>
         <div class="form-group">
           <label for="name"><%= f.label :name %></label>
-          <%= f.text_field :name, type: "text", class: "form-control", id: "name" %>
+          <%= f.text_field :name, type: "text", class: "form-control custom-form-control disabled-focus", id: "name" %>
         </div>
         <div class="form-group">
           <label for="email"><%= f.label :email %></label>
-          <%= f.text_field :email, type: "email", class: "form-control", id: "email" %>
+          <%= f.text_field :email, type: "email", class: "form-control custom-form-control disabled-focus", id: "email" %>
         </div>
         <div class="form-group">
           <label for="password"><%= f.label :password %></label>
-          <%= f.text_field :password, type: "password", class: "form-control", id: "password" %>
+          <%= f.text_field :password, type: "password", class: "form-control custom-form-control disabled-focus", id: "password" %>
         </div>
         <div class="form-group">
           <label for="password_confirmation"><%= f.label :password_confirmation, "Confirmation" %></label>
-          <%= f.text_field :password_confirmation, type: "password", class: "form-control", id: "password_confirmation" %>
+          <%= f.text_field :password_confirmation, type: "password", class: "form-control custom-form-control disabled-focus", id: "password_confirmation" %>
         </div>
         <%= f.submit "Submit", class: "col-md-12 btn btn-success mb-1" %>
-        <%= link_to "Already have an account ?", '/', class: "col-md-12 btn btn-outline-success" %>
+        <%= link_to "Already have an account ?", login_path, class: "col-md-12 btn btn-outline-success" %>
       <% end %>
     </div>
   </div>

@@ -8,6 +8,10 @@ body {
   border: 0
 }
 
+.pt-075 {
+  padding-top: 0.75rem !important;
+}
+
 .circle-image {
   border-radius: 50%;
 }
@@ -46,6 +50,10 @@ body {
 
 .fa-md {
   font-size: 24px;
+}
+
+.custom-navlink {
+  color: red;
 }
 
 //end ultis
@@ -375,7 +383,7 @@ body {
   form {
     input {
       border:0px;
-
+      width: 100%;
       &:focus {
         border:0;
         outline:0;

@@ -64,7 +64,7 @@
             <%= form_for(:comment, url: post_comments_path(@post), method: :post, remote: true, html: { class: "d-flex justify-content-center m-0 p-0"} ) do |f| %>
               <%= f.hidden_field :from_page, value: :show_controller %>
               <%= hidden_field_tag :index_controller %>
-              <%= f.text_area :content, placeholder: "comment in here", class: "pr-2" %>
+              <%= f.text_area :content, placeholder: "Comment....", class: "pr-2" %>
               <%= f.submit "Send", class: "ml-auto comment-btn" %>
             <% end %>
           </div>

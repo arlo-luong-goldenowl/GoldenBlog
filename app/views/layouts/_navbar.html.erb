@@ -1,37 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white gray-border-bottom" style="background-color: #71da71;">
   <div class="container ">
     <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag( get_img_from_cloud("ooo_original_hglqqe.jpg"), height: '56px' ) %>
+      <%= image_tag( get_img_from_cloud("ooo_original_u8ga4x.jpg"), height: '56px' ) %>
     <% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="ml-auto search-wrapper p-2">
-        <i class="fa fa-search fa-md float-left mt-1 mr-2 text-secondary"></i>
-        <%= form_for(:post_search, url: search_posts_path, enforce_utf8: false, html: { method: :get, class: "float-left pt-1 pr-1" } ) do |f| %>
-          <%= f.text_field :text, type: "text", placeholder: "Search...", value: !@text.blank? ? @text : "" %>
-        <% end %>
-      </div>
       <ul class="navbar-nav ml-auto">
+        <div class="search-wrapper p-2">
+          <i class="fa fa-search fa-md float-left mt-1 mr-2 text-secondary"></i>
+          <%= form_for(:post_search, url: search_posts_path, enforce_utf8: false, html: { method: :get, class: "float-left pt-1 pr-1" } ) do |f| %>
+            <%= f.text_field :text, type: "text", placeholder: "Search...", value: !@text.blank? ? @text : "" %>
+          <% end %>
+        </div>
         <% if logged_in? %>
           <% if current_user.role == "admin" %>
             <li class="nav-item">
-              <%= link_to "Dashboard", admin_path, class:"nav-link" %>
+              <%= link_to "Dashboard", admin_path, class:"nav-link text-center pt-075" %>
             </li>
           <% end %>
           <li class="nav-item">
-            <%= link_to "Profile", profile_users_path(status: :new), class:"nav-link" %>
+            <%= link_to "Profile", profile_users_path(status: :new), class:"nav-link text-center pt-075" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Logout", logout_path, method: :delete, class:"nav-link" %>
+            <%= link_to "Logout", logout_path, method: :delete, class:"nav-link text-center pt-075" %>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", login_path, class:"nav-link" %>
+            <%= link_to "Login", login_path, class:"nav-link text-center pt-075" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Signup", signup_path, class:"nav-link" %>
+            <%= link_to "Signup", signup_path, class:"nav-link text-center pt-075" %>
           </li>
         <% end %>
       </ul>

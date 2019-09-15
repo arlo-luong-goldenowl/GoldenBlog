@@ -10,9 +10,8 @@
     </div>
   <% else %>
     <div class="col-md-12 d-flex align-items-center">
-      <%= image_tag( get_img_from_cloud('default_avatar_ezjbiv.png'), class: "float-left circle-image", height: '55px', width: '55px' ) %>
-      <div class="ml-3">
-        <%= link_to "Login now!", login_path, class: "text-decoration-none text-dark" %>
+      <div class="">
+        <%= link_to "Login now !", login_path, class: "text-decoration-none fw-600 font-italic text-secondary" %>
       </div>
     </div>
   <% end %>
@@ -23,11 +22,11 @@
     <% else %>
       <% @latest_posts.each do |post| %>
         <div class="d-flex align-items-center mb-3">
-          <div class="avatar">
-            <%= image_tag( post.user.image.present? ?  post.user.image.to_s : get_img_from_cloud('default_avatar_ezjbiv.png') ) %>
-          </div>
+          <%= link_to user_path(post.user), class: "avatar" do %>
+          <%= image_tag(post.user.image.present? ?  post.user.image.to_s : 'default_avatar.png') %>
+          <% end %>
           <div class="ml-2">
-            <%= post.title %>
+            <%= link_to post.title, post_path(post), class: "text-decoration-none text-dark"  %>
             <br>
             <i class="text-secondary"><%=  time_ago_in_words(post.created_at) %> ago</i>
           </div>
