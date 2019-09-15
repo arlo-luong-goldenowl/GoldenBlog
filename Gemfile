@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'faker'
 gem 'rails-timeago', '~> 2.0'
 gem 'carrierwave'
 gem 'cloudinary'
