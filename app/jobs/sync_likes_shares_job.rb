@@ -60,7 +60,7 @@ class SyncLikesSharesJob < ApplicationJob
         !fb_post["link"].blank? && fb_post["link"].include?(app_url)
       end
 
-      found_post = found_post[2]
+      found_post = found_post[0]
     end
 
     return {
