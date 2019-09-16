@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  require "http"
   before_action :logged_in_user, only: [:new, :create]
   before_action :prepage_post, only: [:show, :edit, :update, :destroy]
   before_action :check_post_exist, only: [:show, :edit, :update, :destroy]
