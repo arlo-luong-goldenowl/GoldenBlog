@@ -30,6 +30,8 @@ class Admin::PostsController < Admin::BaseAdminController
 
   def update
     if @post.update_attributes(post_params)
+      # send mail notification if admin approved some posts
+      MailNotificationWorker.perform_async("new", @post.id) if post_params[:status] == "approved"
       flash[:success] = 'Post was successfully updated.'
       redirect_to admin_posts_path
     else

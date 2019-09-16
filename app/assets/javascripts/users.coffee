@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', ->
+$(document).on('ready turbolinks:load', ->
   $('.change-image-text').on('click', (e) ->
     e.preventDefault()
     $('#customFile').trigger('click')

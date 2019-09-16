@@ -13,4 +13,4 @@ else {
     .addClass('text-dark fa-heart-o')
 }
 
-post_likes_element.html('<%= @post.likes.count %> likes');
+post_likes_element.html('<%= @post.likes_counter + @post.social_likes_counter %> likes');
