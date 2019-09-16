@@ -1,11 +1,23 @@
-user_avatar =  File.open(File.join(Rails.root, 'app/assets/images/default_avatar.png'))
-user1 = User.create(
+require 'faker'
+
+admin_avatar =  File.open(File.join(Rails.root, "app/assets/images/admin.png"))
+User.create(
   name: 'admin',
+  role: 'admin',
   email: 'admin@gmail.com',
-  password: 'admin123456',
-  image: user_avatar,
-  role: 'admin'
+  image: admin_avatar,
+  password: '123456'
 )
+
+5.times do |i|
+  user_avatar =  File.open(File.join(Rails.root, "app/assets/images/avatar#{rand(1..3)}.jpg"))
+  User.create(
+    name: Faker::Name.name,
+    email: Faker::Internet.email,
+    password: '123456',
+    image: user_avatar
+  )
+end
 
 Category.create(name: 'Fashion')
 Category.create(name: 'Music')
@@ -13,23 +25,14 @@ Category.create(name: 'Travel')
 Category.create(name: 'Gamming')
 Category.create(name: 'Programming')
 
-simple_img = [
-  'shiba.jpeg',
-  'docker.jpeg',
-  'meo.jpg'
-]
-
-
-
-15.times do |i|
-  img_name = simple_img[rand(0..2)]
-  image = File.open(File.join(Rails.root, "app/assets/images/#{img_name}"))
-  Post.create(
-    title: "Title with n = #{i}",
-    content: "Content blah blah blah blah with #{i}",
-    user_id: user1.id,
-    category_id: 5,
+30.times do |i|
+  post_image =  File.open(File.join(Rails.root, "app/assets/images/#{rand(1..10)}.jpg"))
+    Post.create(
+    title: Faker::Lorem.sentence(word_count: 3, supplemental: true),
+    content: Faker::Lorem.sentence(word_count: 20, supplemental: true), #=> "Vehemens velit cogo,,
+    user_id: rand(1..5),
+    category_id: rand(1..5),
     status: "approved",
-    image:  image
+    image:  post_image
   )
 end
