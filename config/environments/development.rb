@@ -6,6 +6,7 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -27,6 +28,7 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.active_job.queue_adapter = :sidekiq
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
