@@ -2,17 +2,20 @@ class LikesController < ApplicationController
   before_action :logged_in_user, only: [:like_unlike]
 
   def like_unlike
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
+
+    return if @post.blank?
+
     is_exist = Like.exists?(post_id: @post.id, user_id: current_user.id)
-    if !is_exist
-      like(@post)
-    else
-      unlike(@post)
-    end
+
+    !is_exist ? like(@post) : unlike(@post)
   end
 
   def like(post)
+    return if post.blank?
+
     @post = post
+
     Like.create(post_id: @post.id, user_id: current_user.id)
     @status = true
     @post.update_attributes(likes_counter: @post.likes_counter + 1) if !@post.nil?
@@ -22,7 +25,10 @@ class LikesController < ApplicationController
   end
 
   def unlike(post)
+    return if post.blank?
+
     @post = post
+
     Like.where(post_id: @post.id, user_id: current_user.id).delete_all
     @status = false
     @post.update_attributes(likes_counter: @post.likes_counter - 1) if !@post.nil?
