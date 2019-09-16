@@ -86,6 +86,7 @@ class UsersController < ApplicationController
   def sendmail
     user = User.find_by(email: 'hienviluong125@gmail.com')
     PostMailer.post_deleted_email(user, 'xtitlex', 'yauthoryyy').deliver
+    render json: user
   end
 
   private
