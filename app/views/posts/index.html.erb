@@ -1,8 +1,11 @@
 <div class="container">
   <div class="row p-5">
     <div class="col-md-7">
-      <div class="row">
+      <div class="row post-list">
         <%= render @posts %>
+      </div>
+      <div class="pagination-wrapper d-none text-center">
+         <%= will_paginate @posts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer  %>
       </div>
     </div>
     <div class="col-md-5 ">
