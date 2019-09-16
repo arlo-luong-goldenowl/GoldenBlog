@@ -1,8 +1,4 @@
-:concurrency: 2
+:concurrency: 5
 :queues:
   - default
-# :schedule:
-#   SyncLikesSharesJob:
-#     cron: '0 0 * * *'
-#     queue: scheduler
-#     enabled: true
+  - mailers
