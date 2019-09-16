@@ -17,7 +17,7 @@
                   <h5 class="font-weight-light text-center text-sm-left text-md-left text-lg-left text-xl-left"><%= @user.name %></h5>
                 </div>
                 <div class="col-md-4 mt-2 text-center text-sm-left text-md-left text-lg-left text-xl-left"><%= @user.posts.count %> Posts</div>
-                <div class="col-md-4 mt-2 text-center text-sm-left text-md-left text-lg-left text-xl-left"><%= @user.posts.count %> Likes</div>
+                <div class="col-md-4 mt-2 text-center text-sm-left text-md-left text-lg-left text-xl-left"><%= @user.posts.sum(:social_likes_counter) + @user.posts.sum(:likes_counter) %> Likes</div>
                 <%= link_to( "Edit profile", edit_user_path(@user), class: "col-md-12 mt-3 btn btn-cyan fw-600 text-white disabled-focus" )%>
               </div>
             </div>

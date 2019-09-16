@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  require "http"
   before_action :logged_in_user, only: [:new, :create]
   before_action :prepage_post, only: [:show, :edit, :update, :destroy]
   before_action :check_post_exist, only: [:show, :edit, :update, :destroy]
@@ -35,6 +36,7 @@ class PostsController < ApplicationController
   def update
     if @post.update_attributes(post_params)
       flash[:success] = 'Post was successfully edited.'
+      MailNotificationWorker.perform_async("update", @post.id) if @post.status == "approved"
       redirect_to profile_users_path(status: :new)
     else
       @categories = Category.all
@@ -43,7 +45,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post_clone = @post.clone
     if @post.destroy
+      MailNotificationWorker.perform_async("destroy", @post_clone.title, @post_clone.user.email) if @post_clone.status == "approved"
       flash[:success] = 'Post was successfully deleted.'
       redirect_to profile_users_path(status: :new)
     else
@@ -61,7 +65,7 @@ class PostsController < ApplicationController
                     LOWER(categories.name) like :keyword OR
                     LOWER(posts.content) like :keyword OR
                     LOWER(posts.title) like :keyword',
-                    keyword: "%#{@text}%"
+                    keyword: "%#{@text.downcase}%"
                   )
   end
 

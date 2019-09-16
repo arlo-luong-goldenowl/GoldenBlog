@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', ->
+$(document).on('ready turbolinks:load', ->
   $('#customFile').bind('change', ->
     previewImageId = $(this).data('preview-image')
     set_image_to_preview(this,previewImageId)
@@ -15,6 +15,27 @@ $(document).on('turbolinks:load', ->
       $('.post-detail-comments-wrapper').css('height': new_height)
       $(this).css('height', scroll_height + 'px')
   )
+
+  $('.share-btn').on('click',(e) ->
+    e.preventDefault()
+    redirectLink = $(this).data('href')
+    postId = $(this).data('id')
+    FB.ui({ method: 'share', href: redirectLink }, (response) ->
+      if response && Array.isArray(response)
+        $.ajax({
+          url: "/posts/#{postId}/share",
+          type: "post",
+          dataType: "json",
+          success: (data) ->
+            postElement = $("#post-#{postId}")
+            postSharesElement = postElement.find(".post-shares")
+            postSharesElement.html("#{data.shares_counter + data.social_shares_counter} shares");
+          ,
+          error: (error) ->
+        })
+    )
+  )
+
 )
 
 

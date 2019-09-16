@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  require 'sidekiq/web'
+  require 'sidekiq-scheduler/web'
+
+  mount Sidekiq::Web => '/sidekiq'
+
   root   'posts#index'
   get    '/signup',  to: 'users#new'
   get    '/login',   to: 'sessions#new'
@@ -21,6 +27,7 @@ Rails.application.routes.draw do
     end
     member do
       post :like_unlike, to: 'likes#like_unlike'
+      post :share,       to: 'shares#index'
     end
   end
 

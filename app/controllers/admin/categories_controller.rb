@@ -1,5 +1,6 @@
 class Admin::CategoriesController < Admin::BaseAdminController
   before_action :prepare_category, only: [:edit, :update, :destroy]
+
   def index
     @categories = Category.order(created_at: :desc).paginate(page: params[:page], per_page: 8)
   end

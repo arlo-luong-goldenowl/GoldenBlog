@@ -1,13 +1,13 @@
 require 'faker'
 
-# admin_avatar =  File.open(File.join(Rails.root, "app/assets/images/admin.png"))
-# User.create(
-#   name: 'admin',
-#   role: 'admin',
-#   email: 'admin@gmail.com',
-#   image: admin_avatar,
-#   password: '123456'
-# )
+admin_avatar =  File.open(File.join(Rails.root, "app/assets/images/admin.png"))
+User.create(
+  name: 'admin',
+  role: 'admin',
+  email: 'admin@gmail.com',
+  image: admin_avatar,
+  password: '123456'
+)
 
 5.times do |i|
   user_avatar =  File.open(File.join(Rails.root, "app/assets/images/avatar#{rand(1..3)}.jpg"))
