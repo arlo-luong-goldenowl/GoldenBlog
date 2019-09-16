@@ -83,6 +83,11 @@ class UsersController < ApplicationController
     render :change_password
   end
 
+  def sendmail
+    user = User.find_by(email: 'hienviluong125@gmail.com')
+    PostMailer.post_deleted_email(user, 'xtitlex', 'yauthoryyy').deliver
+  end
+
   private
 
   def user_params

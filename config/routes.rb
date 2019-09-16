@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get '/profile/:status', to: 'users#profile', as: 'profile'
       get 'change-password',  to: 'users#change_password'
       post 'update-password', to: 'users#update_password'
+      get 'sendmail', to: 'users#sendmail'
     end
   end
 
