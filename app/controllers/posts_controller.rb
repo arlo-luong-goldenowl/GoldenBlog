@@ -1,12 +1,11 @@
 class PostsController < ApplicationController
-  require "http"
   before_action :logged_in_user, only: [:new, :create]
   before_action :prepage_post, only: [:show, :edit, :update, :destroy]
   before_action :check_post_exist, only: [:show, :edit, :update, :destroy]
   before_action :check_post_author_with_current_user, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.where(status: :approved)
+    @posts = Post.where(status: :approved).order(created_at: :desc).paginate(page: params[:page], per_page: 6)
   end
 
   def show
