@@ -27,12 +27,14 @@
       <%= link_to post, class: "comment-btn text-decoration-none" do %>
         <i class="ml-3 fa fa-comments fa-large text-dark"></i>
       <% end %>
-       <%= link_to post, class: "share-btn text-decoration-none" do %>
+      <%= link_to post, class: "share-btn text-decoration-none", data: { href: "https://secret-journey-76001.herokuapp.com/posts/#{post.id}", id: post.id } do %>
         <i class="ml-3 fa fa-share fa-large text-dark"></i>
       <% end %>
+
     </div>
     <div class="post-content pl-3">
-      <div class="post-likes fw-600 mt-1"><%= post.likes.count %> likes</div>
+      <span class="post-likes fw-600 mt-1"><%= post.likes_counter + post.social_likes_counter  %> likes</span>
+      <span class="post-shares fw-600 mt-1 ml-2"><%= post.shares_counter + post.social_shares_counter %> shares</span>
       <div class="post-body">
         <span class="fw-600"> <%= link_to post.user.name, user_path(post.user), class: "text-decoration-none text-dark fw-600" %></span>
         <span class="font-weight-normal">

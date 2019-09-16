@@ -3,7 +3,8 @@ user1 = User.create(
   name: 'admin',
   email: 'admin@gmail.com',
   password: 'admin123456',
-  image: user_avatar
+  image: user_avatar,
+  role: 'admin'
 )
 
 Category.create(name: 'Fashion')
@@ -28,6 +29,7 @@ simple_img = [
     content: "Content blah blah blah blah with #{i}",
     user_id: user1.id,
     category_id: 5,
+    status: "approved",
     image:  image
   )
 end

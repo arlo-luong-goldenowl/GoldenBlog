@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :comments
+  has_many :shares
 
 
   # Returns true if the given token matches the digest of attribute
@@ -41,13 +42,30 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth_hash)
-    user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])
-    user.name  = auth_hash['info']['name']
-    user.email = auth_hash['info']['email']
-    user.image = auth_hash['info']['image']
-    user.password = user.new_token
+    user = User.find_by(email: auth_hash['info']['email'])
+    if user
+      user.uid      = auth_hash['uid']
+      user.provider = auth_hash['provider']
+      user.name     = auth_hash['info']['name']
+      user.image    = auth_hash['info']['image']
+      user.access_token    = auth_hash['credentials']['token']
+      user.password = user.new_token
+      user.save!
 
-    user.save!
-    user
+      return user
+    else
+      user = User.new(
+        uid:      auth_hash['uid'],
+        provider: auth_hash['provider'],
+        email:    auth_hash['info']['email'],
+        name:     auth_hash['info']['name'],
+        image:    auth_hash['info']['image'],
+        access_token:    auth_hash['credentials']['token']
+      )
+      user.password = user.new_token
+      user.save!
+
+      return user
+    end
   end
 end
