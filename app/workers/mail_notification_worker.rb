@@ -12,9 +12,9 @@ class MailNotificationWorker
         # PostMailer.post_released_email(user, post).deliver
       elsif type == "update"
         puts "UPDATE"
-        # post_id = argu[0]
-        # post = Post.find(post_id)
-        # PostMailer.post_edited_email(user, post).deliver
+        post_id = argu[0]
+        post = Post.find(post_id)
+        PostMailer.post_edited_email(user, post).deliver
       else
         puts "DELETE"
         # title = argu[0]
