@@ -35,6 +35,7 @@ class PostsController < ApplicationController
   def update
     if @post.update_attributes(post_params)
       flash[:success] = 'Post was successfully edited.'
+      MailNotificationWorker.perform_async("update", @post.id) if @post.status == "approved"
       redirect_to profile_users_path(status: :new)
     else
       @categories = Category.all
@@ -43,7 +44,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post_clone = @post.clone
     if @post.destroy
+      MailNotificationWorker.perform_async("destroy", @post_clone.title, @post_clone.user.email) if @post_clone.status == "approved"
       flash[:success] = 'Post was successfully deleted.'
       redirect_to profile_users_path(status: :new)
     else
@@ -61,7 +64,7 @@ class PostsController < ApplicationController
                     LOWER(categories.name) like :keyword OR
                     LOWER(posts.content) like :keyword OR
                     LOWER(posts.title) like :keyword',
-                    keyword: "%#{@text}%"
+                    keyword: "%#{@text.downcase}%"
                   )
   end
 

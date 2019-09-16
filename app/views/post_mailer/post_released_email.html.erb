@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Hi, Golden blog released new post</h3>
+    <hr/>
+    <p>Author: <%= @post.user.email  %></p>
+    <br>
+    <p><%= @post.title %></p>
+    <%= image_tag( @post.image.to_s ) %>
+    <p><%= @post.content %></p>
+    <%= link_to "More detail", post_url(@post) %>
+  </body>
+</html>
