@@ -100,5 +100,4 @@ class UsersController < ApplicationController
   def prepare_current_user
     @user = User.find(current_user.id)
   end
-
 end
