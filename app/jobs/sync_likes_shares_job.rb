@@ -48,7 +48,9 @@ class SyncLikesSharesJob < ApplicationJob
   end
 
   def get_likes_shares_of_golden_post_from_each_user(user, post_id, app_url)
-    found_post = {}
+    found_posts = Array.new
+    likes_counter = 0
+    shares_counter = 0
     if !user.access_token.blank?
       graph_result_from_user = HTTP.get("https://graph.facebook.com/me?fields=id,name,posts{link,likes.summary(true),shares}&access_token=#{user.access_token}")
 
@@ -56,16 +58,19 @@ class SyncLikesSharesJob < ApplicationJob
 
       all_posts = graph_result_from_user["posts"]["data"]
 
-      found_post = all_posts.select do |fb_post|
+      found_posts = all_posts.select do |fb_post|
         !fb_post["link"].blank? && fb_post["link"].include?(app_url)
       end
+    end
 
-      found_post = found_post[0]
+    found_posts.each do |fb_post|
+      likes_counter += fb_post["likes"] ? fb_post["likes"]["data"].length : 0
+      shares_counter += fb_post["shares"] ? fb_post["shares"]["count"] : 0
     end
 
     return {
-      likes: found_post["likes"] ? found_post["likes"]["data"].length : 0,
-      shares:  found_post["shares"] ? found_post["shares"]["count"] : 0
+      likes: likes_counter,
+      shares: shares_counter
     }
   end
 end

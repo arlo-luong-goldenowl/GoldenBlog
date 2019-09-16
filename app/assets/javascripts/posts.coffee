@@ -29,7 +29,7 @@ $(document).on('ready turbolinks:load', ->
           success: (data) ->
             post_element = $("#post-#{post_id}")
             post_shares_element = post_element.find(".post-shares")
-            post_shares_element.html("#{data.shares_counter} shares");
+            post_shares_element.html("#{data.shares_counter + data.social_shares_counter} shares");
           ,
           error: (error) ->
         })
