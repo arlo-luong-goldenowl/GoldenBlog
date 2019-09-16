@@ -3,6 +3,8 @@ class SyncLikesSharesJob < ApplicationJob
     update_likes_shares()
   end
 
+  private
+
   def update_likes_shares
     posts = Post.all
     posts.each do |post|
@@ -24,15 +26,14 @@ class SyncLikesSharesJob < ApplicationJob
     User
       .joins(:shares)
       .where(
-        shares: {post_id: post_id},
-        users: {provider: "facebook"}
+        shares: { post_id: post_id },
+        users: { provider: "facebook" }
       )
       .select(:id, :name, :email, :access_token, :provider)
-
   end
 
   def calculate_total_likes_shares_of_each_post(users, post_id)
-    app_url = "secret-journey-76001"
+    app_url = ENV['WEB_HOST']
     total_likes_shares = {
       likes: 0,
       shares: 0
@@ -68,7 +69,7 @@ class SyncLikesSharesJob < ApplicationJob
       shares_counter += fb_post["shares"] ? fb_post["shares"]["count"] : 0
     end
 
-    return {
+    {
       likes: likes_counter,
       shares: shares_counter
     }

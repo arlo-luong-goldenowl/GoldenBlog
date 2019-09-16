@@ -18,18 +18,18 @@ $(document).on('ready turbolinks:load', ->
 
   $('.share-btn').on('click',(e) ->
     e.preventDefault()
-    redirect_link = $(this).data('href')
-    post_id = $(this).data('id')
-    FB.ui({ method: 'share', href: redirect_link }, (response) ->
+    redirectLink = $(this).data('href')
+    postId = $(this).data('id')
+    FB.ui({ method: 'share', href: redirectLink }, (response) ->
       if response && Array.isArray(response)
         $.ajax({
-          url: "/posts/#{post_id}/share",
+          url: "/posts/#{postId}/share",
           type: "post",
           dataType: "json",
           success: (data) ->
-            post_element = $("#post-#{post_id}")
-            post_shares_element = post_element.find(".post-shares")
-            post_shares_element.html("#{data.shares_counter + data.social_shares_counter} shares");
+            postElement = $("#post-#{postId}")
+            postSharesElement = postElement.find(".post-shares")
+            postSharesElement.html("#{data.shares_counter + data.social_shares_counter} shares");
           ,
           error: (error) ->
         })
