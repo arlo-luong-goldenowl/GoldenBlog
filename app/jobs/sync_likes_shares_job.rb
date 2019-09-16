@@ -1,6 +1,7 @@
 class SyncLikesSharesJob < ApplicationJob
   def perform
-    update_likes_shares()
+    puts "RUN NE"
+    # update_likes_shares()
   end
 
   private

@@ -1,5 +1,9 @@
+:queues:
+  - critical
+  - default
+  - low
 :schedule:
   SyncLikesSharesJob:
-    cron: '0 0 * * * *'
+    cron: '*/5 * * * * *'
     queue: scheduler
     enabled: true
