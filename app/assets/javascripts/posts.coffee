@@ -23,7 +23,7 @@ $(document).on('ready turbolinks:load', ->
     # console.log("next_page_href",next_page_href)
     if next_page_href && $(window).scrollTop() > $(document).height() - $(window).height() - 50
       $(".pagination-wrapper")
-        .html("<img src='assets/loader.gif' width='50px' height='50px' />")
+        .html("<img src='https://res.cloudinary.com/deku52155/image/upload/v1568690774/loader_pacd3k.gif' width='50px' height='50px' />")
         .removeClass("d-none")
       setTimeout ( ->
         $.getScript(next_page_href)
