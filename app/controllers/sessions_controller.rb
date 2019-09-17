@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    if logged_in?
+      flash[:warning] = "You already logged. Please logout if wanna login with another account"
+      return redirect_to profile_users_path(status: :new)
+    end
     render :new
   end
 
@@ -8,7 +12,7 @@ class SessionsController < ApplicationController
     if(user && user.authenticate(params[:session][:password]))
       log_in(user)
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      flash[:success] = "Welcome to my app"
+      flash[:success] = "Welcome to Golden Blog"
       redirect_to profile_users_path(status: :new)
     else
       flash.now[:danger] = "Invalid email/password combination"

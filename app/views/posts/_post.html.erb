@@ -6,7 +6,7 @@
       <% end %>
       <%= link_to post.user.name, user_path(post.user), class: "ml-3 text-decoration-none text-dark fw-600" %>
       <div class="more-actions ml-auto">
-        <i class="fa fa-ellipsis-h fa-large"></i>
+
       </div>
     </div>
     <div class="post-thumbnail">
@@ -38,7 +38,10 @@
       <div class="post-body">
         <span class="fw-600"> <%= link_to post.user.name, user_path(post.user), class: "text-decoration-none text-dark fw-600" %></span>
         <span class="font-weight-normal">
-          <%= post.content %>
+          <% if post.content.length > 100 %>
+            <%= "#{post.content[0..100]}..." %>
+            <%= link_to "See more", post_path(post) %>
+          <% end %>
         </span>
       </div>
     </div>
@@ -56,7 +59,7 @@
     <div class="mt-2 comment-input gray-border-top p-3 ">
       <%= form_for(:comment, url: post_comments_path(post), method: :post, remote: true, html: { class: "d-flex justify-content-center m-0 p-0"} ) do |f| %>
         <%= f.hidden_field :from_page, value: :index_controller  %>
-        <%= f.text_area :content, placeholder: "comment in here", class: "pr-2" %>
+        <%= f.text_area :content, placeholder: "Comment...", class: "pr-2" %>
         <%= f.submit "Send", class: "ml-auto comment-btn" %>
       <% end %>
     </div>

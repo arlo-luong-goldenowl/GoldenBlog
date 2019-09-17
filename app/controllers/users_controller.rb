@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   before_action :prepare_current_user, only: [:profile, :edit, :update]
 
   def new
+    if logged_in?
+      flash[:warning] = "You already logged. Please logout if wanna signup new account"
+      return redirect_to profile_users_path(status: :new)
+    end
     @user = User.new
   end
 

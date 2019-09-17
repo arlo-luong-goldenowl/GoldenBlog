@@ -14,7 +14,7 @@
             <% end %>
             <span class="fw-600 ml-3"> <%= link_to @post.user.name, user_path(@post.user), class: "text-decoration-none text-dark fw-600" %></span>
             <div class="more-actions ml-auto">
-              <i class="fa fa-ellipsis-h fa-large"></i>
+
             </div>
           </div>
           <div class="post-detail-comments-wrapper pl-4 pr-5 pt-3 ">
@@ -25,7 +25,7 @@
                 <% end %>
                 <div class="mt-2 ml-3">
                   <span class="fw-600"> <%= link_to @post.user.name, user_path(@post.user), class: "text-decoration-none text-dark fw-600" %></span>
-                  <span class="font-weight-normal">
+                  <span class="font-weight-normal pr-2">
                     <%= @post.content %>
                   </span>
                   <p class="text-secondary"><%= time_ago_in_words @post.created_at %> ago</p>
@@ -69,7 +69,7 @@
             <%= form_for(:comment, url: post_comments_path(@post), method: :post, remote: true, html: { class: "d-flex justify-content-center m-0 p-0"} ) do |f| %>
               <%= f.hidden_field :from_page, value: :show_controller %>
               <%= hidden_field_tag :index_controller %>
-              <%= f.text_area :content, placeholder: "comment in here", class: "pr-2" %>
+              <%= f.text_area :content, placeholder: "Comment....", class: "pr-2" %>
               <%= f.submit "Send", class: "ml-auto comment-btn" %>
             <% end %>
           </div>
