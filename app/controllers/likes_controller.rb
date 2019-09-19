@@ -4,7 +4,7 @@ class LikesController < ApplicationController
   def like_unlike
     @post = Post.find_by(id: params[:id])
 
-    return if @post.blank?
+    return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @post.blank?
 
     is_exist = Like.exists?(post_id: @post.id, user_id: current_user.id)
 
@@ -12,7 +12,7 @@ class LikesController < ApplicationController
   end
 
   def like(post)
-    return if post.blank?
+    return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @post.blank?
 
     @post = post
 
@@ -25,7 +25,7 @@ class LikesController < ApplicationController
   end
 
   def unlike(post)
-    return if post.blank?
+    return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if @post.blank?
 
     @post = post
 
