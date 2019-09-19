@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   end
 
   mount_uploader :image, ImageUploader
+
   validates :title, presence: true, length: { in: 10..255 }
   validates :content, presence: true, length: { minimum: 20 }
   validates :category_id, presence: true
