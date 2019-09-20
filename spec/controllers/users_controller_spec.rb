@@ -13,7 +13,7 @@ RSpec.describe UsersController, type: :controller do
         log_in(user)
         do_request
         expect(flash[:warning]).to eq "You already logged. Please logout if wanna signup new account"
-          expect(response).to redirect_to profile_users_path(status: :new)
+        expect(response).to redirect_to profile_users_path(status: :new)
       end
     end
 
@@ -34,26 +34,17 @@ RSpec.describe UsersController, type: :controller do
 
     context "valid params" do
       let(:user) { build(:user) }
-      let(:user_attributes) {
-        user.attributes
-          .except(
-            :id,
-            :created_at,
-            :updated_at
-          )
-          .merge(
-            email: user.email,
-            name: user.name,
-            password: user.password
-          )
-      }
+      let(:user_attributes) { {
+        email: "qwerty123@email.com",
+        name: "abcxyz123",
+        password: 'cccdddeeefff999'
+      } }
       it "signup new user" do
         do_request
         expect(flash[:success]).to eq "Signup Successful !"
         expect(response).to redirect_to login_path
       end
     end
-
   end
 
   describe "#show" do
@@ -66,7 +57,6 @@ RSpec.describe UsersController, type: :controller do
 
     context "Have not logged yet" do
       it "renders :show template" do
-        use_before_action(:prepare_user)
         do_request
         expect(response).to render_template :show
       end
@@ -109,8 +99,6 @@ RSpec.describe UsersController, type: :controller do
     context "user profile" do
       it "renders :profile template" do
         do_request
-        should use_before_action(:logged_in_user)
-        should use_before_action(:prepare_user)
         expect(response).to render_template :profile
       end
     end
@@ -143,17 +131,14 @@ RSpec.describe UsersController, type: :controller do
     before { log_in(user) }
 
     context "valid params" do
-      let!(:user_updated_attributes) do
-        {
+      let!(:user_updated_attributes) { {
           name: "Updated name",
           email: "UpdatedName@gmail.com",
           password: user.password
-        }
-      end
+        } }
 
       it "updates user" do
         do_request
-        should use_before_action(:prepare_current_user)
         expect(flash[:success]).to eq "Update profile Successful !"
         expect(response).to redirect_to edit_user_path(assigns[:user])
       end
@@ -171,7 +156,6 @@ RSpec.describe UsersController, type: :controller do
 
       it "cannot update user" do
         do_request
-        should use_before_action(:prepare_current_user)
         expect(response).to render_template :edit
       end
     end
@@ -189,7 +173,6 @@ RSpec.describe UsersController, type: :controller do
     context "Access change password page" do
       it "renders :change_password template" do
         do_request
-        should use_before_action(:logged_in_user)
         expect(response).to render_template :change_password
       end
     end
@@ -215,7 +198,6 @@ RSpec.describe UsersController, type: :controller do
 
       it "Cannot update password for user" do
         do_request
-        should use_before_action(:prepare_current_user)
         expect(flash[:danger]).to eq "Can't let any inputs be blank"
         expect(response).to render_template :change_password
       end
@@ -232,7 +214,6 @@ RSpec.describe UsersController, type: :controller do
 
       it "Cannot update password for user" do
         do_request
-        should use_before_action(:prepare_current_user)
         expect(flash[:danger]).to eq "Old password doesn't match your account's password"
         expect(response).to render_template :change_password
       end
@@ -249,7 +230,6 @@ RSpec.describe UsersController, type: :controller do
 
       it "Cannot update password for user" do
         do_request
-        should use_before_action(:prepare_current_user)
         expect(flash[:danger]).to eq "New password doesn't match your new password confirmation"
         expect(response).to render_template :change_password
       end
@@ -266,13 +246,9 @@ RSpec.describe UsersController, type: :controller do
 
       it "Cannot update password for user" do
         do_request
-        should use_before_action(:prepare_current_user)
         expect(flash[:danger]).to eq "New password doesn't match your new password confirmation"
         expect(response).to render_template :change_password
       end
     end
-
   end
-
-
 end

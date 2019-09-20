@@ -50,6 +50,5 @@ RSpec.describe LikesController, type: :controller do
         expect(response).to render_template :like_unlike
       end
     end
-
   end
 end

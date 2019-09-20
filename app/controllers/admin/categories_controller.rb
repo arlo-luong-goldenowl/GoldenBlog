@@ -46,7 +46,6 @@ class Admin::CategoriesController < Admin::BaseAdminController
     end
   end
 
-
   private
 
   def category_params

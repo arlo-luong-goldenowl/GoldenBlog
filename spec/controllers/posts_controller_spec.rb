@@ -11,7 +11,7 @@ RSpec.describe PostsController, type: :controller do
 
     it 'renders posts list' do
       do_request
-      expect(assigns(:posts).size).to be <= 6
+      expect(assigns(:posts)).to eq [post_2, post_1]
       expect(response).to render_template :index
     end
 
@@ -35,8 +35,6 @@ RSpec.describe PostsController, type: :controller do
       let!(:post) { create(:post, status: :approved) }
       it "renders :show template" do
         do_request(-69)
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
         expect(assigns(:post)).to be_nil
         should respond_with(404)
       end
@@ -44,10 +42,9 @@ RSpec.describe PostsController, type: :controller do
 
     context "Post exist and status is approved" do
       let!(:post) { create(:post, status: :approved) }
+
       it "renders :show template" do
         do_request(post.id)
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
         expect(assigns(:post)).not_to be_nil
         expect(response).to render_template :show
       end
@@ -57,8 +54,6 @@ RSpec.describe PostsController, type: :controller do
       let!(:fake_post) { create(:post, status: :rejected) }
       it "renders " do
         do_request(fake_post.id)
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
         expect(assigns(:post)).not_to be_nil
         should respond_with(404)
       end
@@ -77,9 +72,7 @@ RSpec.describe PostsController, type: :controller do
 
     it "renders :new template" do
       do_request
-      should use_before_action(:logged_in_user)
-      expect(assigns(:categories).size).to be > 0
-      expect(assigns(:post)).not_to be_nil
+      expect(assigns(:categories)).to eq [category_1]
       expect(response).to render_template :new
     end
   end
@@ -115,15 +108,14 @@ RSpec.describe PostsController, type: :controller do
         .merge({
           category_id: category.id,
           user_id: user.id,
-          title: nil,
-          content: '..',
-          image: nil
+          title: 'short',
+          content: 'Blah blah blah blah blah content 123156'
         })
       }
 
       it "create post failure" do
         do_request
-        expect(assigns(:post).errors.messages.length).to be > 0
+        expect(assigns(:post).errors.messages[:title][0]).to eq "is too short (minimum is 10 characters)"
         expect(response).to render_template :new
       end
     end
@@ -143,9 +135,6 @@ RSpec.describe PostsController, type: :controller do
 
       it "renders :edit template" do
         do_request
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
-        use_before_action(:check_post_author_with_current_user)
         expect(response).to render_template :edit
       end
     end
@@ -155,9 +144,6 @@ RSpec.describe PostsController, type: :controller do
 
       it "renders 404 page" do
         do_request
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
-        use_before_action(:check_post_author_with_current_user)
         should respond_with(404)
       end
     end
@@ -167,9 +153,6 @@ RSpec.describe PostsController, type: :controller do
 
       it "renders 404 page" do
         do_request
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
-        use_before_action(:check_post_author_with_current_user)
         should respond_with(404)
       end
     end
@@ -190,9 +173,6 @@ RSpec.describe PostsController, type: :controller do
 
       it "renders 404 page" do
         do_request
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
-        use_before_action(:check_post_author_with_current_user)
         should respond_with(404)
       end
     end
@@ -203,9 +183,6 @@ RSpec.describe PostsController, type: :controller do
 
       it "renders 404 page" do
         do_request
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
-        use_before_action(:check_post_author_with_current_user)
         should respond_with(404)
       end
     end
@@ -216,9 +193,6 @@ RSpec.describe PostsController, type: :controller do
 
       it "update post successful" do
         do_request
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
-        use_before_action(:check_post_author_with_current_user)
         expect(post.reload.title).to eq post_updated_attributes[:title]
         expect(flash[:success]).to eq "Post was successfully edited."
         expect(response).to redirect_to profile_users_path(status: :new)
@@ -231,9 +205,6 @@ RSpec.describe PostsController, type: :controller do
 
       it "update post failure" do
         do_request
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
-        use_before_action(:check_post_author_with_current_user)
         expect(post.reload.title).to eq post.title
         expect(response).to render_template :edit
       end
@@ -254,9 +225,6 @@ RSpec.describe PostsController, type: :controller do
 
       it "renders 404 page" do
         do_request
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
-        use_before_action(:check_post_author_with_current_user)
         should respond_with(404)
       end
     end
@@ -266,9 +234,6 @@ RSpec.describe PostsController, type: :controller do
 
       it "renders 404 page" do
         do_request
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
-        use_before_action(:check_post_author_with_current_user)
         should respond_with(404)
       end
     end
@@ -278,9 +243,6 @@ RSpec.describe PostsController, type: :controller do
 
       it "Destroy post successful" do
         expect { do_request }.to change { Post.count }.by(-1)
-        use_before_action(:prepare_post)
-        use_before_action(:check_post_exist)
-        use_before_action(:check_post_author_with_current_user)
         expect(flash[:success]).to eq "Post was successfully deleted."
         expect(response).to redirect_to profile_users_path(status: :new)
       end
