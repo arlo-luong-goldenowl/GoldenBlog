@@ -1,5 +1,6 @@
 class Admin::PostsController < Admin::BaseAdminController
   before_action :prepare_post, only: [:show, :edit, :update, :destroy]
+  before_action :check_post_exist, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.order(created_at: :desc).paginate(page: params[:page], per_page: 8)
@@ -50,7 +51,6 @@ class Admin::PostsController < Admin::BaseAdminController
     end
   end
 
-
   private
 
   def post_params
@@ -58,6 +58,10 @@ class Admin::PostsController < Admin::BaseAdminController
   end
 
   def prepare_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
+  end
+
+  def check_post_exist
+    return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if !@post
   end
 end
