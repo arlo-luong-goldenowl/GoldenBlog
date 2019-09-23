@@ -1,5 +1,6 @@
 class Admin::CategoriesController < Admin::BaseAdminController
   before_action :prepare_category, only: [:edit, :update, :destroy]
+  before_action :check_category_exist, only: [:edit, :update, :destroy]
 
   def index
     @categories = Category.order(created_at: :desc).paginate(page: params[:page], per_page: 8)
@@ -53,6 +54,10 @@ class Admin::CategoriesController < Admin::BaseAdminController
   end
 
   def prepare_category
-    @category = Category.find(params[:id])
+    @category = Category.find_by(id: params[:id])
+  end
+
+  def check_category_exist
+    return render(file: "#{Rails.root}/public/404", layout: false, status: :not_found) if !@category
   end
 end

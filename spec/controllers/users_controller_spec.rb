@@ -45,6 +45,20 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to redirect_to login_path
       end
     end
+
+    context "invalid params" do
+      let(:user) { build(:user) }
+      let(:user_attributes) { {
+        email: "qwerty123$%x.com",
+        name: "xxxyyyzzz",
+        password: '_&*'
+      } }
+      it "renders :new template and show error alerts" do
+        do_request
+        expect(assigns(:user).errors.messages[:password]).to eq ["is too short (minimum is 6 characters)"]
+        expect(response).to render_template :new
+      end
+    end
   end
 
   describe "#show" do
@@ -235,18 +249,34 @@ RSpec.describe UsersController, type: :controller do
       end
     end
 
-    context "password" do
+    context "password too short" do
       let!(:user_updated_attributes) do
         {
           old_password: user.password,
-          new_password:"987654321",
-          new_password_confirmation:"123456789"
+          new_password:"111",
+          new_password_confirmation:"111"
         }
       end
 
       it "Cannot update password for user" do
         do_request
-        expect(flash[:danger]).to eq "New password doesn't match your new password confirmation"
+        expect(flash[:danger]).to eq "Your new password too short, please try again"
+        expect(response).to render_template :change_password
+      end
+    end
+
+    context "pass all condition" do
+      let!(:user_updated_attributes) do
+        {
+          old_password: user.password,
+          new_password:"123456789",
+          new_password_confirmation:"123456789"
+        }
+      end
+
+      it "Update password success" do
+        do_request
+        expect(flash[:success]).to eq "Change password success"
         expect(response).to render_template :change_password
       end
     end
