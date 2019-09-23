@@ -93,10 +93,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :old_password, :new_password, :new_password_confirmation)
   end
 
-  def change_password_params
-    params.require(:user).permit()
-  end
-
   def prepare_user
     @user = User.find(params[:id])
   end
