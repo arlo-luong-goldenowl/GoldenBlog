@@ -11,7 +11,7 @@ gem 'cloudinary'
 gem 'omniauth-facebook'
 gem 'will_paginate-bootstrap4'
 #bootstrap 4
-gem 'bootstrap', '~> 4.2.1'
+gem 'bootstrap', '~> 4.3.1'
 #jquery
 gem 'jquery-rails'
 # Enviroment variables
